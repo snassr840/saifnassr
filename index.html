@@ -1,0 +1,3206 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>رحله الي الجنه</title>
+  <style>
+    :root {
+      --bg: #eaf8ff;
+      --panel: #ffffff;
+      --ink: #153245;
+      --muted: #607989;
+      --primary: #2496c8;
+      --primary-dark: #176f9e;
+      --accent: #7cc9e8;
+      --soft: #f7fcff;
+      --border: #cfe8f4;
+      --selected: #e1f5ff;
+      --shadow: 0 18px 45px rgba(31, 112, 154, 0.13);
+      --section-a: #eaf8ff;
+      --section-b: #f0fbf7;
+      --section-c: #fff8e8;
+      --section-d: #f4f0ff;
+    }
+
+    body.dark {
+      --bg: #0f1f1b;
+      --panel: #172b25;
+      --ink: #edf8f2;
+      --muted: #b6c9c0;
+      --primary: #6fd0f0;
+      --primary-dark: #aeeaff;
+      --accent: #7cc9e8;
+      --soft: #102533;
+      --border: #294b5d;
+      --selected: #173c51;
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.24);
+    }
+
+    body.theme-cream {
+      --bg: #f5efe2;
+      --soft: #fffaf0;
+      --selected: #fff0c5;
+    }
+
+    body.theme-white {
+      --bg: #f6f8f7;
+      --soft: #ffffff;
+      --selected: #eaf4ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(124, 201, 232, 0.36), transparent 34rem),
+        linear-gradient(180deg, #f8fdff, var(--bg));
+      min-height: 100vh;
+    }
+
+    body.dark {
+      background:
+        radial-gradient(circle at top right, rgba(100, 199, 164, 0.18), transparent 34rem),
+        linear-gradient(180deg, #10211d, var(--bg));
+    }
+
+    header {
+      padding: 28px 18px 18px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--primary-dark);
+      font-size: clamp(2rem, 5vw, 4rem);
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 10px auto 0;
+      color: var(--muted);
+      max-width: 760px;
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .top-controls,
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .top-controls select {
+      width: auto;
+      min-width: 150px;
+    }
+
+    .home-return {
+      position: fixed;
+      right: 16px;
+      bottom: 76px;
+      z-index: 12;
+      background: #fff8e8;
+      color: #6b5520;
+      border: 1px solid #ead9a9;
+      box-shadow: var(--shadow);
+    }
+
+    main {
+      width: min(1220px, calc(100% - 28px));
+      margin: 0 auto 36px;
+    }
+
+    .home-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 18px 0;
+    }
+
+    .section-groups {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+      margin: 18px 0 0;
+    }
+
+    .section-groups h2 {
+      margin: 0 0 6px;
+      color: var(--primary-dark);
+      font-size: 1.35rem;
+    }
+
+    .section-groups p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .group-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .group-tab {
+      background: var(--soft);
+      color: var(--primary-dark);
+      border: 1px solid var(--border);
+    }
+
+    .group-tab.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .home-actions .choice[hidden] {
+      display: none;
+    }
+
+    .quick-panel {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+      margin: 0 0 18px;
+    }
+
+    .mini-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+      line-height: 1.8;
+    }
+
+    .mini-card strong {
+      display: block;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+    }
+
+    .story-card {
+      font-size: 1.06rem;
+      line-height: 2.1;
+      padding: 20px;
+    }
+
+    .story-card strong {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+    }
+
+    .story-card .story-text {
+      white-space: pre-line;
+    }
+
+    .story-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 14px;
+      border-bottom: 1px solid var(--border);
+      background: var(--soft);
+    }
+
+    .story-reader {
+      display: grid;
+      gap: 14px;
+      padding: 14px;
+    }
+
+    .choice {
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, var(--section-color, var(--panel)), var(--panel));
+      color: var(--ink);
+      border-radius: 10px;
+      padding: 24px;
+      text-align: right;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .choice:hover,
+    .choice.active {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
+
+    .choice strong {
+      display: block;
+      color: var(--primary-dark);
+      font-size: 1.45rem;
+      margin-bottom: 8px;
+    }
+
+    .choice span {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .choice[data-open="quranView"] { --section-color: #e6f7ff; }
+    .choice[data-open="tafsirView"] { --section-color: #eef8ee; }
+    .choice[data-open="hadithView"] { --section-color: #fff5df; }
+    .choice[data-open="adhkarView"] { --section-color: #f0efff; }
+    .choice[data-open="prayerTimesView"] { --section-color: #eaf7f0; }
+    .choice[data-open="qiblaView"] { --section-color: #fef1f1; }
+    .choice[data-open="languagesView"] { --section-color: #edf6ff; }
+    .choice[data-open="favoritesView"] { --section-color: #f8f0ff; }
+    .choice[data-open="khatmaView"] { --section-color: #edf9fb; }
+    .choice[data-open="ramadanView"] { --section-color: #fff7e6; }
+    .choice[data-open="namesView"] { --section-color: #f1faee; }
+    .choice[data-open="storiesView"] { --section-color: #fff0f5; }
+    .choice[data-open="storyLibraryView"] { --section-color: #eefcf7; }
+    .choice[data-open="seerahView"] { --section-color: #eef7ff; }
+    .choice[data-open="seerahVideosView"] { --section-color: #fff3ee; }
+    .choice[data-open="bedtimeStoriesView"] { --section-color: #f7f2ff; }
+    .choice[data-open="khushuView"] { --section-color: #eef2ff; }
+    .choice[data-open="comfortView"] { --section-color: #e9fbff; }
+    .choice[data-open="ruqyahView"] { --section-color: #f4fbef; }
+    .choice[data-open="kidsView"] { --section-color: #fff8db; }
+    .choice[data-open="journalView"] { --section-color: #f2f7ff; }
+
+    .view {
+      display: none;
+      background: linear-gradient(180deg, var(--view-tint, rgba(255, 255, 255, 0.88)), rgba(255, 255, 255, 0.92));
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    #quranView { --view-tint: #f3fbff; }
+    #tafsirView { --view-tint: #f4fbf2; }
+    #hadithView { --view-tint: #fff9ed; }
+    #adhkarView { --view-tint: #f7f5ff; }
+    #prayerTimesView { --view-tint: #f3fbf6; }
+    #qiblaView { --view-tint: #fff6f6; }
+    #languagesView { --view-tint: #f2f8ff; }
+    #favoritesView { --view-tint: #fbf6ff; }
+    #khatmaView { --view-tint: #effbfc; }
+    #ramadanView { --view-tint: #fff9ec; }
+    #namesView { --view-tint: #f4fbf0; }
+    #storiesView { --view-tint: #fff5fa; }
+    #storyLibraryView { --view-tint: #f1fcf7; }
+    #seerahView { --view-tint: #f2f9ff; }
+    #seerahVideosView { --view-tint: #fff7f3; }
+    #bedtimeStoriesView { --view-tint: #faf6ff; }
+    #khushuView { --view-tint: #f4f6ff; }
+    #comfortView { --view-tint: #f0fbff; }
+    #ruqyahView { --view-tint: #f6fbf0; }
+    #kidsView { --view-tint: #fff9e5; }
+    #journalView { --view-tint: #f4f8ff; }
+
+    body.dark .view {
+      background: linear-gradient(180deg, #122b39, var(--panel));
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+      align-items: end;
+      margin-bottom: 16px;
+    }
+
+    .tool-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 16px;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    select,
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 10px;
+      font: inherit;
+    }
+
+    body.dark select,
+    body.dark input,
+    body.dark textarea,
+    body.dark .list-item,
+    body.dark .content-panel,
+    body.dark .hadith-card,
+    body.dark .mini-card {
+      background: var(--panel);
+      color: var(--ink);
+    }
+
+    button {
+      border: 0;
+      background: var(--primary);
+      color: white;
+      border-radius: 8px;
+      padding: 11px 14px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      background: #e4f1eb;
+      color: var(--primary-dark);
+      border: 1px solid var(--border);
+    }
+
+    button.secondary.active {
+      background: var(--selected);
+      border-color: var(--accent);
+    }
+
+    .reader-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 16px;
+    }
+
+    .surah-list,
+    .hadith-list {
+      max-height: 560px;
+      overflow: auto;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--soft);
+      padding: 8px;
+    }
+
+    .list-item {
+      display: block;
+      width: 100%;
+      margin-bottom: 6px;
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--border);
+      text-align: right;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .list-item.active {
+      background: var(--selected);
+      border-color: var(--accent);
+    }
+
+    .content-panel {
+      min-height: 560px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .info-tile {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--panel);
+      padding: 14px;
+      line-height: 1.7;
+    }
+
+    .info-tile strong {
+      display: block;
+      color: var(--primary-dark);
+      margin-bottom: 4px;
+    }
+
+    .qibla-dial {
+      width: min(280px, 70vw);
+      aspect-ratio: 1;
+      border: 12px solid #d9f0fa;
+      border-radius: 50%;
+      margin: 18px auto;
+      position: relative;
+      background: radial-gradient(circle, #fff 0 54%, #eefaff 55% 100%);
+      box-shadow: inset 0 0 0 1px var(--border), var(--shadow);
+    }
+
+    .qibla-needle {
+      width: 8px;
+      height: 43%;
+      background: var(--primary);
+      border-radius: 99px 99px 6px 6px;
+      position: absolute;
+      left: calc(50% - 4px);
+      top: 8%;
+      transform-origin: 50% 98%;
+      transform: rotate(0deg);
+    }
+
+    .qibla-center {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--primary-dark);
+      position: absolute;
+      inset: calc(50% - 17px);
+    }
+
+    .language-panel {
+      display: none;
+      margin-top: 12px;
+    }
+
+    .language-panel.open {
+      display: block;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(90deg, #fff, #edf7f2);
+    }
+
+    body.dark .panel-head {
+      background: linear-gradient(90deg, #172b25, #10241f);
+    }
+
+    .panel-head h2,
+    .panel-head h3 {
+      margin: 0;
+      color: var(--primary-dark);
+    }
+
+    .quran-page {
+      padding: 20px;
+      max-height: 620px;
+      overflow: auto;
+      line-height: 2.45;
+      font-size: clamp(1.35rem, 2.5vw, 2rem);
+    }
+
+    #quranView.reading-expanded {
+      position: fixed;
+      inset: 10px;
+      z-index: 20;
+      overflow: auto;
+      padding: 12px;
+    }
+
+    #quranView.reading-expanded .reader-layout {
+      grid-template-columns: 220px 1fr;
+    }
+
+    #quranView.reading-expanded .quran-page {
+      max-height: calc(100vh - 250px);
+    }
+
+    body.font-small .quran-page {
+      font-size: 1.2rem;
+    }
+
+    body.font-large .quran-page {
+      font-size: 2.2rem;
+    }
+
+    body.font-xlarge .quran-page {
+      font-size: 2.65rem;
+    }
+
+    .ayah {
+      display: inline;
+      border-radius: 8px;
+      padding: 2px 5px;
+      cursor: pointer;
+    }
+
+    .ayah.selected {
+      background: var(--selected);
+      box-shadow: inset 0 0 0 1px var(--accent);
+    }
+
+    .ayah.playing {
+      background: #d7f7e8;
+      box-shadow: inset 0 0 0 1px var(--primary);
+    }
+
+    .ayah.favorite {
+      text-decoration: underline;
+      text-decoration-color: var(--accent);
+      text-decoration-thickness: 3px;
+    }
+
+    .ayah-number {
+      color: var(--primary);
+      font-size: 0.75em;
+      margin: 0 4px;
+    }
+
+    .ayah-action-menu {
+      position: fixed;
+      z-index: 30;
+      display: none;
+      width: min(320px, calc(100vw - 24px));
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .ayah-action-menu.open {
+      display: grid;
+      gap: 8px;
+    }
+
+    .ayah-action-menu strong {
+      color: var(--primary-dark);
+      line-height: 1.6;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .audio-status {
+      margin: 10px 14px 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .pager {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      padding: 14px;
+      border-top: 1px solid var(--border);
+      background: var(--soft);
+    }
+
+    .note {
+      padding: 12px 14px;
+      border: 1px solid #ead9a9;
+      background: #fff9e8;
+      color: #6b5520;
+      border-radius: 10px;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    .hadith-card {
+      padding: 14px;
+      border-bottom: 1px solid var(--border);
+      line-height: 2;
+    }
+
+    .adhkar-grid,
+    .favorites-grid,
+    .search-results {
+      display: grid;
+      gap: 12px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      background: var(--primary-dark);
+      color: var(--panel);
+      padding: 12px 14px;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 10;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
+    .radio-card audio {
+      margin-top: 8px;
+    }
+
+    .radio-card .audio-status {
+      margin: 8px 0 0;
+    }
+
+    .hadith-card strong {
+      color: var(--primary-dark);
+    }
+
+    @media (max-width: 900px) {
+      .home-actions,
+      .reader-layout,
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .surah-list,
+      .hadith-list {
+        max-height: 260px;
+      }
+
+      .home-return {
+        right: 12px;
+        bottom: 70px;
+        padding: 10px 12px;
+      }
+
+      #quranView .toolbar label:has(#quranSearchInput),
+      #quranView .toolbar button#searchQuranBtn {
+        position: sticky;
+        top: 0;
+        z-index: 6;
+      }
+
+      #quranView .toolbar label:has(#quranSearchInput) {
+        background: var(--panel);
+        padding: 8px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+
+      #quranView.reading-expanded {
+        inset: 0;
+        border-radius: 0;
+      }
+
+      #quranView.reading-expanded .reader-layout {
+        grid-template-columns: 1fr;
+      }
+
+      #quranView.reading-expanded .surah-list {
+        max-height: 170px;
+      }
+
+      #quranView.reading-expanded .quran-page {
+        max-height: calc(100vh - 390px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>رحله الي الجنه</h1>
+    <p class="subtitle">موقع هادئ لقراءة القرآن الكريم والاستماع للتلاوة، مع قسم للأحاديث الشريفة قابل للتوسيع والبحث.</p>
+    <div class="top-controls">
+      <button class="home-return" id="homeBtn">الرئيسية</button>
+      <button class="secondary" id="themeToggleBtn">الوضع الليلي</button>
+      <select id="pageThemeSelect" aria-label="اختيار لون المصحف">
+        <option value="green">لون أخضر هادئ</option>
+        <option value="cream">لون كريمي</option>
+        <option value="white">لون أبيض</option>
+      </select>
+      <button class="secondary" id="lastPlaceBtn">العودة لآخر مكان</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-groups" aria-label="مجموعات الأقسام">
+      <h2 id="groupTitle">مجموعة القرآن الكريم</h2>
+      <p id="groupDescription">اختر ما تريد من القراءة والتفسير والختمة والمفضلة في مكان واحد.</p>
+      <div class="group-tabs" role="tablist" aria-label="تصنيف الأقسام">
+        <button class="group-tab active" type="button" data-show-group="quran">القرآن الكريم</button>
+        <button class="group-tab" type="button" data-show-group="worship">العبادة اليومية</button>
+        <button class="group-tab" type="button" data-show-group="knowledge">العلم والقصص</button>
+        <button class="group-tab" type="button" data-show-group="heart">طمأنينة وتنظيم</button>
+      </div>
+    </section>
+
+    <section class="home-actions" aria-label="اختيارات الموقع">
+      <button class="choice active" data-open="quranView">
+        <strong>قراءة القرآن</strong>
+        <span>استعرض السور، اختر الشيخ، حدد عدد مرات التكرار، واختر آية محددة أو عدة آيات للاستماع.</span>
+      </button>
+      <button class="choice" data-open="quranView" data-scroll-radio="true">
+        <strong>راديو القرآن الكريم</strong>
+        <span>تشغيل راديو قرآن فقط من داخل البرنامج، مع اختيار القارئ من لوحة اليوم.</span>
+      </button>
+      <button class="choice" data-open="tafsirView">
+        <strong>تفسير القرآن الكريم</strong>
+        <span>اختر السورة والآية واقرأ تفسيرًا ميسرًا يساعدك على الفهم والتدبر.</span>
+      </button>
+      <button class="choice" data-open="hadithView">
+        <strong>قراءة الأحاديث</strong>
+        <span>قسم للأحاديث الشريفة مع البحث والتصنيف، ويمكن ربطه لاحقًا بقاعدة بيانات كاملة.</span>
+      </button>
+      <button class="choice" data-open="adhkarView">
+        <strong>الأذكار والأدعية</strong>
+        <span>دعاء قبل الصلاة وبعد الصلاة، وكل الأذكار والأدعية في بطاقات سهلة القراءة.</span>
+      </button>
+      <button class="choice" data-open="adhkarView" data-dhikr-go="morning">
+        <strong>أذكار الصباح</strong>
+        <span>افتح أذكار الصباح مباشرة من الاختيارات بدون البحث داخل القسم.</span>
+      </button>
+      <button class="choice" data-open="adhkarView" data-dhikr-go="evening">
+        <strong>أذكار المساء</strong>
+        <span>افتح أذكار المساء مباشرة في بطاقات واضحة وسهلة النسخ.</span>
+      </button>
+      <button class="choice" data-open="prayerTimesView">
+        <strong>مواقيت الصلاة</strong>
+        <span>اعرف مواقيت الصلاة لأي مدينة في العالم مع اختيار الدولة والمدينة أو كتابة موقعك.</span>
+      </button>
+      <button class="choice" data-open="qiblaView">
+        <strong>اتجاه القبلة</strong>
+        <span>احسب اتجاه القبلة من موقعك الحالي أو من أي إحداثيات تختارها.</span>
+      </button>
+      <button class="choice" data-open="languagesView">
+        <strong>تغيير اللغة</strong>
+        <span>افتح قائمة واسعة تضم لغات العالم لاختيار لغة واجهة البرنامج.</span>
+      </button>
+      <button class="choice" data-open="favoritesView">
+        <strong>المفضلة</strong>
+        <span>احفظ الآيات والأحاديث التي تحب الرجوع إليها بسرعة.</span>
+      </button>
+      <button class="choice" data-open="khatmaView">
+        <strong>ختمة القرآن</strong>
+        <span>تابع تقدمك في الختمة وعدد الصفحات التي قرأتها.</span>
+      </button>
+      <button class="choice" data-open="ramadanView">
+        <strong>خطة رمضان</strong>
+        <span>اختر خطة ختمة 30 أو 15 أو 10 أيام واعرف وردك اليومي.</span>
+      </button>
+      <button class="choice" data-open="namesView">
+        <strong>أسماء الله الحسنى</strong>
+        <span>استعرض الأسماء الحسنى في بطاقات هادئة.</span>
+      </button>
+      <button class="choice" data-open="storiesView">
+        <strong>قصص الأنبياء</strong>
+        <span>قصص مكتوبة كاملة ومقروءة عن الأنبياء للعبرة والتدبر.</span>
+      </button>
+      <button class="choice" data-open="storyLibraryView">
+        <strong>كل القصص</strong>
+        <span>كل القصص الدينية مكتوبة في مكان واحد: القرآن، الأنبياء، الصحابة، الصحابيات، السيرة، الأطفال، وقبل النوم.</span>
+      </button>
+      <button class="choice" data-open="seerahView">
+        <strong>السيرة النبوية</strong>
+        <span>محطات وقصص مكتوبة من حياة النبي محمد ﷺ بأسلوب سهل ومفصل.</span>
+      </button>
+      <button class="choice" data-open="seerahVideosView">
+        <strong>فيديوهات السيرة النبوية</strong>
+        <span>روابط لمحاضرات وسلاسل سيرة من مشايخ ودعاة معروفين.</span>
+      </button>
+      <button class="choice" data-open="bedtimeStoriesView">
+        <strong>قصص دينية قبل النوم</strong>
+        <span>قصص هادئة قصيرة بمعنى جميل وخاتمة مطمئنة قبل النوم.</span>
+      </button>
+      <button class="choice" data-open="khushuView">
+        <strong>جلسة خشوع</strong>
+        <span>ابدأ جلسة تجمع قرآنًا وذكرًا ودعاءً في دقائق قليلة.</span>
+      </button>
+      <button class="choice" data-open="comfortView">
+        <strong>طمّن قلبك</strong>
+        <span>آيات وأحاديث وأدعية للضيق والخوف والحزن والتوبة.</span>
+      </button>
+      <button class="choice" data-open="ruqyahView">
+        <strong>الرقية الشرعية</strong>
+        <span>آيات وأدعية الرقية في مكان واحد للقراءة والنسخ.</span>
+      </button>
+      <button class="choice" data-open="kidsView">
+        <strong>قسم الأطفال</strong>
+        <span>سور قصيرة وأذكار سهلة وقصص بسيطة للأطفال.</span>
+      </button>
+      <button class="choice" data-open="kidsView">
+        <strong>فيديوهات الأطفال</strong>
+        <span>قصص الإنسان والحيوان في القرآن وروابط بحث مناسبة للأطفال داخل نفس القسم.</span>
+      </button>
+      <button class="choice" data-open="journalView">
+        <strong>سجل روحاني</strong>
+        <span>اكتب ماذا تعلمت اليوم واحفظ خواطرك.</span>
+      </button>
+    </section>
+
+    <section class="quick-panel" aria-label="لوحة يومية">
+      <div class="mini-card">
+        <strong>ورد اليوم</strong>
+        <div id="dailyWird">جاري تجهيز ورد اليوم...</div>
+        <div class="card-actions">
+          <button class="secondary" id="dailySurahBtn">افتح السورة</button>
+        </div>
+      </div>
+      <div class="mini-card">
+        <strong>حديث اليوم</strong>
+        <div id="dailyHadith">جاري تجهيز حديث اليوم...</div>
+      </div>
+      <div class="mini-card">
+        <strong>إنجازك</strong>
+        <div id="progressStats">لم تبدأ القراءة اليوم بعد.</div>
+      </div>
+      <div class="mini-card">
+        <strong>مستواك</strong>
+        <div id="levelStats">جاري حساب المستوى...</div>
+      </div>
+      <div class="mini-card">
+        <strong>دعاء اليوم</strong>
+        <div id="dailyDua">جاري تجهيز دعاء اليوم...</div>
+      </div>
+      <div class="mini-card">
+        <strong>تحدي اليوم</strong>
+        <div id="dailyChallenge">جاري تجهيز تحدي اليوم...</div>
+        <div class="card-actions">
+          <button class="secondary" id="completeChallengeBtn">أنجزت التحدي</button>
+        </div>
+      </div>
+      <div class="mini-card">
+        <strong>تذكير الأذكار</strong>
+        <label>
+          كل كام دقيقة؟
+          <input id="reminderMinutes" type="number" min="1" max="180" value="30" />
+        </label>
+        <div class="card-actions">
+          <button class="secondary" id="startReminderBtn">تشغيل التذكير</button>
+          <button class="secondary" id="stopReminderBtn">إيقاف التذكير</button>
+        </div>
+      </div>
+      <div class="mini-card">
+        <strong>مؤقت جلسة عبادة</strong>
+        <label>
+          مدة الجلسة
+          <select id="worshipTimerMinutes">
+            <option value="5">5 دقائق</option>
+            <option value="10">10 دقائق</option>
+            <option value="15">15 دقيقة</option>
+          </select>
+        </label>
+        <div id="worshipTimerDisplay" style="font-size:2rem;font-weight:800;text-align:center;margin:10px 0;">00:00</div>
+        <div class="card-actions">
+          <button class="secondary" id="startWorshipTimerBtn">ابدأ</button>
+          <button class="secondary" id="stopWorshipTimerBtn">إيقاف</button>
+        </div>
+      </div>
+      <div class="mini-card">
+        <strong>تعلم آية اليوم</strong>
+        <div id="dailyAyahLearning">جاري تجهيز الآية...</div>
+      </div>
+      <div class="mini-card radio-card">
+        <strong>راديو القرآن الكريم</strong>
+        <label>
+          محطة الراديو
+          <select id="quranRadioSelect">
+            <option value="https://qurango.net/radio/mishary_alafasi">مشاري العفاسي</option>
+            <option value="https://qurango.net/radio/maher">ماهر المعيقلي</option>
+            <option value="https://qurango.net/radio/abdulbasit_abdulsamad">عبد الباسط عبد الصمد</option>
+            <option value="https://qurango.net/radio/minshawi">محمد صديق المنشاوي</option>
+          </select>
+        </label>
+        <div class="card-actions">
+          <button id="playRadioBtn">تشغيل الراديو</button>
+          <button class="secondary" id="stopRadioBtn">إيقاف</button>
+        </div>
+        <audio id="quranRadioPlayer" controls></audio>
+        <div class="audio-status" id="quranRadioStatus">الراديو مخصص للقرآن الكريم فقط.</div>
+      </div>
+      <div class="mini-card">
+        <strong>التاريخ اليوم</strong>
+        <div id="todayDates">جاري تجهيز التاريخ...</div>
+      </div>
+    </section>
+
+    <section class="view active" id="quranView">
+      <div class="toolbar">
+        <label>
+          اختيار الشيخ
+          <select id="reciterSelect">
+            <option value="yasser">الشيخ ياسر الدوسري</option>
+            <option value="abdulbasit">شيخ عبد الباسط</option>
+            <option value="maher">شيخ ماهر المعقلي</option>
+            <option value="minshawi">الشيخ محمد صديق المنشاوي</option>
+            <option value="husary">الشيخ محمود خليل الحصري</option>
+            <option value="sudais">الشيخ عبد الرحمن السديس</option>
+            <option value="bandar">شيخ بندر بليله</option>
+            <option value="banna">الشيخ محمود علي البنا</option>
+            <option value="mustafaIsmail">الشيخ مصطفى إسماعيل</option>
+            <option value="elsayedMetwally">الشيخ السيد متولي</option>
+            <option value="tablawi">الشيخ السيد سعيد الطبلاوي</option>
+            <option value="mahmoudShahat">الشيخ محمود الشحات</option>
+          </select>
+        </label>
+        <label>
+          خط المصحف
+          <select id="fontSizeSelect" aria-label="اختيار حجم خط القرآن">
+            <option value="normal">خط متوسط</option>
+            <option value="small">خط صغير</option>
+            <option value="large">خط كبير</option>
+            <option value="xlarge">خط كبير جدًا</option>
+          </select>
+        </label>
+        <label>
+          تكرار السورة
+          <input id="repeatInput" type="number" min="1" max="20" value="1" />
+        </label>
+        <label>
+          رقم آية محددة
+          <input id="ayahInput" type="number" min="1" placeholder="مثال: 5" />
+        </label>
+        <label>
+          تحديد من آية
+          <input id="rangeStartInput" type="number" min="1" placeholder="مثال: 1" />
+        </label>
+        <label>
+          إلى آية
+          <input id="rangeEndInput" type="number" min="1" placeholder="مثال: 60" />
+        </label>
+        <button class="secondary" id="selectRangeBtn">تحديد المدى</button>
+        <label>
+          بحث في السورة
+          <input id="quranSearchInput" type="search" placeholder="مثال: رحمة" />
+        </label>
+        <label>
+          افتح سورة
+          <input id="surahJumpInput" type="search" placeholder="اكتب اسم السورة أو رقمها" />
+        </label>
+        <button class="secondary" id="surahJumpBtn">فتح السورة</button>
+        <button id="playBtn">تشغيل الآيات المحددة</button>
+        <button class="secondary" id="playFullSurahBtn">تشغيل السورة كاملة</button>
+        <button class="secondary" id="pauseBtn">إيقاف مؤقت</button>
+        <button class="secondary" id="stopBtn">إيقاف القراءة</button>
+        <button class="secondary" id="searchQuranBtn">بحث</button>
+        <button class="secondary" id="expandReaderBtn">تكبير شاشة القراءة</button>
+      </div>
+
+      <div class="reader-layout">
+        <aside class="surah-list" id="surahList" aria-label="قائمة السور"></aside>
+        <section class="content-panel">
+          <div class="panel-head">
+            <h2 id="surahTitle">الفاتحة</h2>
+            <div class="card-actions">
+              <button class="secondary" id="favoriteAyahsBtn">حفظ الآيات المحددة</button>
+              <button class="secondary" id="shareAyahsBtn">نسخ الآيات المحددة</button>
+              <button class="secondary" id="clearSelectionBtn">إلغاء تحديد الآيات</button>
+            </div>
+          </div>
+          <div class="quran-page" id="quranPage">
+            جاري تحميل القرآن الكريم...
+          </div>
+          <div class="pager">
+            <button class="secondary" id="prevSurahBtn">السورة السابقة</button>
+            <button class="secondary" id="nextSurahBtn">السورة التالية</button>
+          </div>
+          <div class="audio-status" id="audioStatus">اختر الشيخ والسورة ثم اضغط تشغيل التلاوة.</div>
+          <audio id="audioPlayer" controls></audio>
+          <div class="note" id="completionDua" style="display:none;margin:14px;">
+            اللهم اجعل القرآن ربيع قلوبنا ونور صدورنا وجلاء أحزاننا وذهاب همومنا.
+          </div>
+        </section>
+      </div>
+      <div class="search-results" id="quranSearchResults"></div>
+    </section>
+
+    <section class="view" id="tafsirView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>تفسير القرآن الكريم</h3>
+          <span>اختيار سريع للسورة والآية</span>
+        </div>
+        <div class="toolbar" style="padding:14px;margin-bottom:0;">
+          <label>
+            السورة
+            <select id="tafsirSurahSelect"></select>
+          </label>
+          <label>
+            رقم الآية
+            <input id="tafsirAyahInput" type="number" min="1" value="1" />
+          </label>
+          <button id="loadTafsirBtn">عرض التفسير</button>
+          <button class="secondary" id="copyTafsirBtn">نسخ التفسير</button>
+        </div>
+        <div class="mini-card" style="margin:14px;">
+          <strong id="tafsirTitle">اختر آية</strong>
+          <div id="tafsirText">اختر السورة ورقم الآية ثم اضغط عرض التفسير.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="hadithView">
+      <div class="note">
+        الأحاديث هنا مختارة من مصادر صحيحة أو حسنة مع كتابة المصدر. ويمكن زيادة العدد لاحقًا بقاعدة بيانات حديث موثوقة.
+      </div>
+      <div class="toolbar">
+        <label>
+          البحث في الأحاديث
+          <input id="hadithSearch" type="search" placeholder="اكتب كلمة للبحث..." />
+        </label>
+        <label>
+          التصنيف
+          <select id="hadithFilter">
+            <option value="all">كل التصنيفات</option>
+            <option value="intentions">النية</option>
+            <option value="mercy">الرحمة</option>
+            <option value="manners">الأخلاق</option>
+            <option value="faith">الإيمان</option>
+            <option value="prayer">الصلاة</option>
+            <option value="quran">القرآن</option>
+            <option value="charity">الصدقة</option>
+            <option value="dhikr">الذكر</option>
+            <option value="family">صلة الرحم</option>
+          </select>
+        </label>
+        <button id="showHadithBtn">عرض الأحاديث</button>
+      </div>
+
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>الأحاديث الشريفة</h3>
+          <span id="hadithCount"></span>
+        </div>
+        <div id="hadithResults"></div>
+      </div>
+    </section>
+
+    <section class="view" id="adhkarView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>الأذكار والأدعية</h3>
+          <span>اختر القسم وانسخ ما تريد بسهولة</span>
+        </div>
+        <div class="toolbar" style="padding:14px;margin-bottom:0;">
+          <button class="secondary dhikr-filter active" data-dhikr-filter="all">كل الأذكار والأدعية</button>
+          <button class="secondary dhikr-filter" data-dhikr-filter="morning">أذكار الصباح</button>
+          <button class="secondary dhikr-filter" data-dhikr-filter="evening">أذكار المساء</button>
+          <button class="secondary dhikr-filter" data-dhikr-filter="before-prayer">دعاء قبل الصلاة</button>
+          <button class="secondary dhikr-filter" data-dhikr-filter="after-prayer">دعاء بعد الصلاة</button>
+          <button class="secondary dhikr-filter" data-dhikr-filter="adhkar">كل الأذكار</button>
+          <button class="secondary dhikr-filter" data-dhikr-filter="duaa">كل الأدعية</button>
+          <button class="secondary dhikr-filter" data-dhikr-filter="tasbih">التسبيح</button>
+          <button class="secondary dhikr-filter" data-dhikr-filter="istighfar">الاستغفار</button>
+        </div>
+        <div class="mini-card" id="tasbihCounter" style="display:none;margin:14px;">
+          <strong>عداد الذكر</strong>
+          <label>
+            اختر الذكر
+            <select id="tasbihPhrase">
+              <option value="سبحان الله">سبحان الله</option>
+              <option value="الحمد لله">الحمد لله</option>
+              <option value="الله أكبر">الله أكبر</option>
+              <option value="لا إله إلا الله">لا إله إلا الله</option>
+              <option value="أستغفر الله">أستغفر الله</option>
+              <option value="سبحان الله وبحمده">سبحان الله وبحمده</option>
+              <option value="اللهم صل وسلم على نبينا محمد">اللهم صل وسلم على نبينا محمد</option>
+            </select>
+          </label>
+          <label>
+            الهدف
+            <input id="tasbihTarget" type="number" min="1" value="100" />
+          </label>
+          <div style="font-size:3rem;font-weight:800;text-align:center;color:var(--primary-dark);margin:12px 0;" id="tasbihCount">0</div>
+          <div id="tasbihProgress" style="line-height:1.8;text-align:center;"></div>
+          <div class="card-actions">
+            <button id="incrementTasbihBtn">تسبيح</button>
+            <button class="secondary" id="resetTasbihBtn">تصفير</button>
+            <button class="secondary" id="saveTasbihBtn">حفظ في المفضلة</button>
+          </div>
+        </div>
+        <div class="adhkar-grid" id="adhkarList" style="padding:14px;"></div>
+      </div>
+    </section>
+
+    <section class="view" id="favoritesView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>المفضلة</h3>
+          <button class="secondary" id="clearFavoritesBtn">مسح المفضلة</button>
+        </div>
+        <div class="favorites-grid" id="favoritesList" style="padding:14px;"></div>
+      </div>
+    </section>
+
+    <section class="view" id="khatmaView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>ختمة القرآن</h3>
+          <span>إجمالي المصحف 604 صفحة</span>
+        </div>
+        <div class="mini-card" style="margin:14px;">
+          <label>
+            عدد الصفحات التي قرأتها اليوم
+            <input id="khatmaPagesInput" type="number" min="1" max="604" value="1" />
+          </label>
+          <div class="card-actions">
+            <button id="addKhatmaPagesBtn">إضافة للإنجاز</button>
+            <button class="secondary" id="resetKhatmaBtn">بدء ختمة جديدة</button>
+          </div>
+          <div id="khatmaProgress" style="margin-top:12px;line-height:1.8;"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="ramadanView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>خطة رمضان</h3>
+          <span>خطة ختمة مرنة حسب الأيام</span>
+        </div>
+        <div class="mini-card" style="margin:14px;">
+          <label>
+            اختر الخطة
+            <select id="ramadanPlanSelect">
+              <option value="30">ختمة في 30 يوم</option>
+              <option value="15">ختمة في 15 يوم</option>
+              <option value="10">ختمة في 10 أيام</option>
+            </select>
+          </label>
+          <div id="ramadanPlan" style="margin-top:12px;line-height:1.8;"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="prayerTimesView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>مواقيت الصلاة في كل العالم</h3>
+          <span>اختر مدينة جاهزة أو اكتب مدينة ودولة</span>
+        </div>
+        <div class="toolbar" style="padding:14px;margin-bottom:0;">
+          <label>
+            مدينة سريعة
+            <select id="worldCitySelect"></select>
+          </label>
+          <label>
+            المدينة
+            <input id="prayerCityInput" type="text" value="Makkah" />
+          </label>
+          <label>
+            الدولة
+            <input id="prayerCountryInput" type="text" value="Saudi Arabia" />
+          </label>
+          <label>
+            طريقة الحساب
+            <select id="prayerMethodSelect">
+              <option value="4">أم القرى</option>
+              <option value="5">رابطة العالم الإسلامي</option>
+              <option value="2">ISNA</option>
+              <option value="3">مصر</option>
+              <option value="13">تركيا</option>
+            </select>
+          </label>
+          <button id="loadPrayerTimesBtn">عرض المواقيت</button>
+          <button class="secondary" id="usePrayerLocationBtn">استخدم موقعي</button>
+        </div>
+        <div class="info-grid" id="prayerTimesGrid"></div>
+      </div>
+    </section>
+
+    <section class="view" id="qiblaView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>اتجاه القبلة</h3>
+          <span>الدرجة محسوبة نحو الكعبة المشرفة</span>
+        </div>
+        <div class="toolbar" style="padding:14px;margin-bottom:0;">
+          <label>
+            خط العرض
+            <input id="qiblaLatInput" type="number" step="0.0001" value="24.7136" />
+          </label>
+          <label>
+            خط الطول
+            <input id="qiblaLngInput" type="number" step="0.0001" value="46.6753" />
+          </label>
+          <button id="calculateQiblaBtn">احسب القبلة</button>
+          <button class="secondary" id="useQiblaLocationBtn">استخدم موقعي</button>
+        </div>
+        <div class="qibla-dial" aria-label="بوصلة القبلة">
+          <div class="qibla-needle" id="qiblaNeedle"></div>
+          <div class="qibla-center"></div>
+        </div>
+        <div class="mini-card" style="margin:14px;text-align:center;">
+          <strong id="qiblaDirection">اتجاه القبلة جاهز للحساب</strong>
+          <div id="qiblaHint">أدخل موقعك أو اضغط استخدم موقعي.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="languagesView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>تغيير اللغة</h3>
+          <button id="toggleLanguagePanelBtn">عرض كل اللغات</button>
+        </div>
+        <div class="mini-card" style="margin:14px;">
+          <label>
+            اختر اللغة من لغات العالم
+            <select id="languageSelect"></select>
+          </label>
+          <div class="card-actions">
+            <button id="applyLanguageBtn">تطبيق اللغة</button>
+            <button class="secondary" id="openTranslateBtn">فتح ترجمة الصفحة</button>
+          </div>
+          <div class="language-panel" id="languagePanel">
+            <div class="info-grid" id="languageGrid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="namesView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>أسماء الله الحسنى</h3>
+          <span>تأمل واحفظ وانسخ</span>
+        </div>
+        <div class="favorites-grid" id="namesList" style="padding:14px;"></div>
+      </div>
+    </section>
+
+    <section class="view" id="storiesView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>قصص الأنبياء</h3>
+          <span>قصص مكتوبة وليست ملخصات</span>
+        </div>
+        <div class="favorites-grid" id="storiesList" style="padding:14px;"></div>
+      </div>
+    </section>
+
+    <section class="view" id="storyLibraryView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>كل القصص</h3>
+          <span>كل القصص مكتوبة هنا في مكان واحد</span>
+        </div>
+        <div class="note" style="margin:14px;">
+          القصص هنا مكتوبة بشكل أطول للقراءة، وروابط الفيديوهات تفتح بحثًا موجّهًا لمشايخ ودعاة معروفين. لا يمكن ضمان كل فيديو على الإنترنت 100%، لذلك اختر القناة الرسمية أو المصدر الأوضح دائمًا.
+        </div>
+        <div class="story-tabs" id="storyCategoryTabs"></div>
+        <div class="story-reader" id="storyLibraryList"></div>
+      </div>
+    </section>
+
+    <section class="view" id="seerahView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>السيرة النبوية</h3>
+          <span>قصص ومحطات من حياة النبي ﷺ</span>
+        </div>
+        <div class="favorites-grid" id="seerahList" style="padding:14px;"></div>
+      </div>
+    </section>
+
+    <section class="view" id="seerahVideosView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>فيديوهات السيرة النبوية</h3>
+          <span>افتح السلاسل من مصادر واضحة وتحقق من القناة قبل المشاهدة</span>
+        </div>
+        <div class="note" style="margin:14px;">
+          اخترنا أسماء معروفة، لكن لا يوجد ضمان بشري بنسبة 100% لكل مقطع على الإنترنت. الأفضل مشاهدة السلاسل من القنوات الرسمية أو المصادر الموثوقة ومراجعة الكلام مع القرآن والسنة الصحيحة.
+        </div>
+        <div class="favorites-grid" id="seerahVideosList" style="padding:14px;"></div>
+      </div>
+    </section>
+
+    <section class="view" id="bedtimeStoriesView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>قصص دينية قبل النوم</h3>
+          <span>قراءة هادئة وخفيفة قبل النوم</span>
+        </div>
+        <div class="favorites-grid" id="bedtimeStoriesList" style="padding:14px;"></div>
+      </div>
+    </section>
+
+    <section class="view" id="khushuView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>جلسة خشوع</h3>
+          <button id="startKhushuBtn">ابدأ جلسة خشوع</button>
+        </div>
+        <div class="favorites-grid" id="khushuSteps" style="padding:14px;"></div>
+      </div>
+    </section>
+
+    <section class="view" id="comfortView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>طمّن قلبك</h3>
+          <span>اختر الشعور واقرأ ما يطمئنك</span>
+        </div>
+        <div class="toolbar" style="padding:14px;margin-bottom:0;">
+          <button class="secondary comfort-filter active" data-comfort-filter="all">الكل</button>
+          <button class="secondary comfort-filter" data-comfort-filter="sadness">الحزن</button>
+          <button class="secondary comfort-filter" data-comfort-filter="fear">الخوف</button>
+          <button class="secondary comfort-filter" data-comfort-filter="repentance">التوبة</button>
+          <button class="secondary comfort-filter" data-comfort-filter="rizq">الرزق</button>
+        </div>
+        <div class="favorites-grid" id="comfortList" style="padding:14px;"></div>
+      </div>
+    </section>
+
+    <section class="view" id="ruqyahView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>الرقية الشرعية</h3>
+          <span>آيات وأدعية مأثورة للقراءة</span>
+        </div>
+        <div class="favorites-grid" id="ruqyahList" style="padding:14px;"></div>
+      </div>
+    </section>
+
+    <section class="view" id="kidsView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>قسم الأطفال</h3>
+          <span>تعلم بسيط ومحبب</span>
+        </div>
+        <div class="favorites-grid" id="kidsList" style="padding:14px;"></div>
+      </div>
+    </section>
+
+    <section class="view" id="journalView">
+      <div class="content-panel">
+        <div class="panel-head">
+          <h3>سجل روحاني</h3>
+          <button class="secondary" id="clearJournalBtn">مسح السجل</button>
+        </div>
+        <div class="mini-card" style="margin:14px;">
+          <label>
+            ماذا تعلمت اليوم؟
+            <textarea id="journalInput" rows="5" style="width:100%;border:1px solid var(--border);border-radius:8px;padding:10px;font:inherit;background:var(--panel);color:var(--ink);"></textarea>
+          </label>
+          <div class="card-actions">
+            <button id="saveJournalBtn">حفظ الملاحظة</button>
+          </div>
+        </div>
+        <div class="favorites-grid" id="journalList" style="padding:14px;"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="ayah-action-menu" id="ayahActionMenu" role="dialog" aria-label="اختيارات الآية"></div>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const surahs = [
+      'الفاتحة','البقرة','آل عمران','النساء','المائدة','الأنعام','الأعراف','الأنفال','التوبة','يونس','هود','يوسف','الرعد','إبراهيم','الحجر','النحل','الإسراء','الكهف','مريم','طه','الأنبياء','الحج','المؤمنون','النور','الفرقان','الشعراء','النمل','القصص','العنكبوت','الروم','لقمان','السجدة','الأحزاب','سبأ','فاطر','يس','الصافات','ص','الزمر','غافر','فصلت','الشورى','الزخرف','الدخان','الجاثية','الأحقاف','محمد','الفتح','الحجرات','ق','الذاريات','الطور','النجم','القمر','الرحمن','الواقعة','الحديد','المجادلة','الحشر','الممتحنة','الصف','الجمعة','المنافقون','التغابن','الطلاق','التحريم','الملك','القلم','الحاقة','المعارج','نوح','الجن','المزمل','المدثر','القيامة','الإنسان','المرسلات','النبأ','النازعات','عبس','التكوير','الانفطار','المطففين','الانشقاق','البروج','الطارق','الأعلى','الغاشية','الفجر','البلد','الشمس','الليل','الضحى','الشرح','التين','العلق','القدر','البينة','الزلزلة','العاديات','القارعة','التكاثر','العصر','الهمزة','الفيل','قريش','الماعون','الكوثر','الكافرون','النصر','المسد','الإخلاص','الفلق','الناس'
+    ];
+
+    const reciterFolders = {
+      yasser: ['Yasser_Ad-Dussary_128kbps'],
+      abdulbasit: ['Abdul_Basit_Murattal_192kbps', 'Abdul_Basit_Mujawwad_128kbps'],
+      maher: ['MaherAlMuaiqly128kbps'],
+      minshawi: ['Minshawy_Murattal_128kbps', 'Minshawy_Mujawwad_192kbps'],
+      husary: ['Husary_128kbps', 'Husary_Muallim_128kbps'],
+      sudais: ['Abdurrahmaan_As-Sudais_192kbps'],
+      bandar: ['Bandar_Baleela_64kbps', 'Yasser_Ad-Dussary_128kbps'],
+      banna: ['Mahmoud_Ali_Al-Banna_32kbps'],
+      mustafaIsmail: ['Mustafa_Ismail_48kbps'],
+      elsayedMetwally: ['Minshawy_Mujawwad_192kbps', 'Abdul_Basit_Mujawwad_128kbps'],
+      tablawi: ['Mohammad_Al_Tablaway_128kbps'],
+      mahmoudShahat: ['Yasser_Ad-Dussary_128kbps', 'MaherAlMuaiqly128kbps']
+    };
+
+    const hadiths = [
+      { category: 'intentions', source: 'متفق عليه', text: 'إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى.' },
+      { category: 'faith', source: 'صحيح مسلم', text: 'الطهور شطر الإيمان.' },
+      { category: 'faith', source: 'متفق عليه', text: 'لا يؤمن أحدكم حتى يحب لأخيه ما يحب لنفسه.' },
+      { category: 'faith', source: 'صحيح مسلم', text: 'الدين النصيحة.' },
+      { category: 'manners', source: 'متفق عليه', text: 'من كان يؤمن بالله واليوم الآخر فليقل خيرًا أو ليصمت.' },
+      { category: 'manners', source: 'صحيح البخاري', text: 'المسلم من سلم المسلمون من لسانه ويده.' },
+      { category: 'manners', source: 'رواه الترمذي وقال: حسن صحيح', text: 'أكمل المؤمنين إيمانًا أحسنهم خلقًا.' },
+      { category: 'manners', source: 'رواه الترمذي وحسنه', text: 'تبسمك في وجه أخيك صدقة.' },
+      { category: 'mercy', source: 'رواه أبو داود والترمذي وصححه الألباني', text: 'الراحمون يرحمهم الرحمن، ارحموا من في الأرض يرحمكم من في السماء.' },
+      { category: 'mercy', source: 'متفق عليه', text: 'من لا يرحم لا يرحم.' },
+      { category: 'prayer', source: 'صحيح البخاري', text: 'صلوا كما رأيتموني أصلي.' },
+      { category: 'prayer', source: 'صحيح مسلم', text: 'أقرب ما يكون العبد من ربه وهو ساجد، فأكثروا الدعاء.' },
+      { category: 'prayer', source: 'متفق عليه', text: 'من بنى مسجدًا لله بنى الله له في الجنة مثله.' },
+      { category: 'quran', source: 'صحيح البخاري', text: 'خيركم من تعلم القرآن وعلمه.' },
+      { category: 'quran', source: 'صحيح مسلم', text: 'اقرؤوا القرآن فإنه يأتي يوم القيامة شفيعًا لأصحابه.' },
+      { category: 'quran', source: 'متفق عليه', text: 'الماهر بالقرآن مع السفرة الكرام البررة.' },
+      { category: 'charity', source: 'متفق عليه', text: 'اتقوا النار ولو بشق تمرة.' },
+      { category: 'charity', source: 'صحيح مسلم', text: 'ما نقصت صدقة من مال.' },
+      { category: 'dhikr', source: 'متفق عليه', text: 'كلمتان خفيفتان على اللسان، ثقيلتان في الميزان، حبيبتان إلى الرحمن: سبحان الله وبحمده، سبحان الله العظيم.' },
+      { category: 'dhikr', source: 'صحيح مسلم', text: 'سبق المفردون. قالوا: وما المفردون يا رسول الله؟ قال: الذاكرون الله كثيرًا والذاكرات.' },
+      { category: 'family', source: 'متفق عليه', text: 'من كان يؤمن بالله واليوم الآخر فليصل رحمه.' },
+      { category: 'family', source: 'صحيح البخاري', text: 'ليس الواصل بالمكافئ، ولكن الواصل الذي إذا قطعت رحمه وصلها.' },
+      { category: 'intentions', source: 'صحيح مسلم', text: 'من دل على خير فله مثل أجر فاعله.' },
+      { category: 'manners', source: 'صحيح مسلم', text: 'لا تحقرن من المعروف شيئًا ولو أن تلقى أخاك بوجه طلق.' },
+      { category: 'mercy', source: 'صحيح مسلم', text: 'والله في عون العبد ما كان العبد في عون أخيه.' },
+      { category: 'manners', source: 'متفق عليه', text: 'يسروا ولا تعسروا، وبشروا ولا تنفروا.' },
+      { category: 'manners', source: 'صحيح البخاري', text: 'لا تغضب.' },
+      { category: 'manners', source: 'متفق عليه', text: 'ليس الشديد بالصرعة، إنما الشديد الذي يملك نفسه عند الغضب.' },
+      { category: 'manners', source: 'صحيح مسلم', text: 'من غشنا فليس منا.' },
+      { category: 'manners', source: 'صحيح مسلم', text: 'إن الله جميل يحب الجمال.' },
+      { category: 'manners', source: 'متفق عليه', text: 'المؤمن للمؤمن كالبنيان يشد بعضه بعضًا.' },
+      { category: 'manners', source: 'متفق عليه', text: 'الحياء لا يأتي إلا بخير.' },
+      { category: 'faith', source: 'متفق عليه', text: 'الإيمان بضع وسبعون شعبة، والحياء شعبة من الإيمان.' },
+      { category: 'faith', source: 'صحيح مسلم', text: 'عجبًا لأمر المؤمن، إن أمره كله خير.' },
+      { category: 'faith', source: 'صحيح مسلم', text: 'الدنيا سجن المؤمن وجنة الكافر.' },
+      { category: 'prayer', source: 'متفق عليه', text: 'من قام رمضان إيمانًا واحتسابًا غفر له ما تقدم من ذنبه.' },
+      { category: 'prayer', source: 'متفق عليه', text: 'أحب الأعمال إلى الله أدومها وإن قل.' },
+      { category: 'quran', source: 'صحيح البخاري', text: 'بلغوا عني ولو آية.' },
+      { category: 'quran', source: 'صحيح مسلم', text: 'لا تجعلوا بيوتكم مقابر، إن الشيطان ينفر من البيت الذي تقرأ فيه سورة البقرة.' },
+      { category: 'charity', source: 'متفق عليه', text: 'الكلمة الطيبة صدقة.' },
+      { category: 'charity', source: 'متفق عليه', text: 'إماطة الأذى عن الطريق صدقة.' },
+      { category: 'charity', source: 'متفق عليه', text: 'اليد العليا خير من اليد السفلى.' },
+      { category: 'charity', source: 'صحيح البخاري', text: 'كل معروف صدقة.' },
+      { category: 'dhikr', source: 'صحيح مسلم', text: 'لأن أقول: سبحان الله، والحمد لله، ولا إله إلا الله، والله أكبر أحب إلي مما طلعت عليه الشمس.' },
+      { category: 'dhikr', source: 'متفق عليه', text: 'مثل الذي يذكر ربه والذي لا يذكر ربه مثل الحي والميت.' },
+      { category: 'family', source: 'متفق عليه', text: 'لا يدخل الجنة قاطع.' },
+      { category: 'family', source: 'متفق عليه', text: 'من أحب أن يبسط له في رزقه وينسأ له في أثره فليصل رحمه.' },
+      { category: 'mercy', source: 'صحيح مسلم', text: 'من نفس عن مؤمن كربة من كرب الدنيا نفس الله عنه كربة من كرب يوم القيامة.' },
+      { category: 'mercy', source: 'صحيح مسلم', text: 'إن الله كتب الإحسان على كل شيء.' },
+      { category: 'intentions', source: 'رواه الترمذي وقال: حسن', text: 'من حسن إسلام المرء تركه ما لا يعنيه.' },
+      { category: 'manners', source: 'رواه ابن ماجه ومالك وصححه الألباني', text: 'لا ضرر ولا ضرار.' },
+      { category: 'faith', source: 'صحيح مسلم', text: 'من سلك طريقًا يلتمس فيه علمًا سهل الله له به طريقًا إلى الجنة.' },
+      { category: 'manners', source: 'متفق عليه', text: 'إياكم والظن، فإن الظن أكذب الحديث.' },
+      { category: 'manners', source: 'متفق عليه', text: 'لا تباغضوا ولا تحاسدوا ولا تدابروا، وكونوا عباد الله إخوانًا.' },
+      { category: 'charity', source: 'صحيح مسلم', text: 'إذا مات الإنسان انقطع عنه عمله إلا من ثلاثة: صدقة جارية، أو علم ينتفع به، أو ولد صالح يدعو له.' },
+      { category: 'prayer', source: 'صحيح مسلم', text: 'بين الرجل وبين الشرك والكفر ترك الصلاة.' },
+      { category: 'faith', source: 'متفق عليه', text: 'اجتنبوا السبع الموبقات.' },
+      { category: 'mercy', source: 'صحيح مسلم', text: 'من ستر مسلمًا ستره الله في الدنيا والآخرة.' },
+      { category: 'manners', source: 'صحيح البخاري', text: 'إن من خياركم أحسنكم أخلاقًا.' }
+    ];
+
+    const quranCache = new Map();
+    let currentSurah = 1;
+    let selectedAyahs = new Set();
+    let rangeStartAyah = null;
+    let playbackQueue = [];
+    let playbackIndex = 0;
+    let currentAyahs = [];
+    let dailySurahNumber = 1;
+
+    const surahList = document.getElementById('surahList');
+    const quranPage = document.getElementById('quranPage');
+    const surahTitle = document.getElementById('surahTitle');
+    const audioPlayer = document.getElementById('audioPlayer');
+    const audioStatus = document.getElementById('audioStatus');
+    const toast = document.getElementById('toast');
+    const ayahActionMenu = document.getElementById('ayahActionMenu');
+    let sourceAttempt = 0;
+
+    const adhkar = [
+      { category: 'before-prayer', type: 'duaa', title: 'دعاء قبل الصلاة', text: 'اللهم باعد بيني وبين خطاياي كما باعدت بين المشرق والمغرب، اللهم نقني من خطاياي كما ينقى الثوب الأبيض من الدنس.' },
+      { category: 'before-prayer', type: 'duaa', title: 'دعاء التوجه للصلاة', text: 'وجهت وجهي للذي فطر السماوات والأرض حنيفًا وما أنا من المشركين.' },
+      { category: 'before-prayer', type: 'duaa', title: 'دعاء طلب الخشوع', text: 'اللهم ارزقني قلبًا خاشعًا ولسانًا ذاكرًا وعملًا متقبلًا.' },
+      { category: 'after-prayer', type: 'dhikr', title: 'بعد الصلاة', text: 'أستغفر الله، أستغفر الله، أستغفر الله، اللهم أنت السلام ومنك السلام تباركت يا ذا الجلال والإكرام.' },
+      { category: 'after-prayer', type: 'dhikr', title: 'تسبيح بعد الصلاة', text: 'سبحان الله ثلاثًا وثلاثين، والحمد لله ثلاثًا وثلاثين، والله أكبر ثلاثًا وثلاثين، وتمام المئة: لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير.' },
+      { category: 'after-prayer', type: 'duaa', title: 'دعاء بعد الصلاة', text: 'اللهم أعني على ذكرك وشكرك وحسن عبادتك.' },
+      { category: 'after-prayer', type: 'duaa', title: 'دعاء الثبات', text: 'رب اجعلني مقيم الصلاة ومن ذريتي ربنا وتقبل دعاء.' },
+      { category: 'morning', type: 'dhikr', title: 'أذكار الصباح', text: 'أصبحنا وأصبح الملك لله، والحمد لله، لا إله إلا الله وحده لا شريك له.' },
+      { category: 'morning', type: 'dhikr', title: 'آية الكرسي صباحًا', text: 'اقرأ آية الكرسي مرة واحدة في الصباح: الله لا إله إلا هو الحي القيوم...' },
+      { category: 'morning', type: 'dhikr', title: 'المعوذات صباحًا', text: 'قل هو الله أحد، وقل أعوذ برب الفلق، وقل أعوذ برب الناس، ثلاث مرات.' },
+      { category: 'morning', type: 'dhikr', title: 'سيد الاستغفار صباحًا', text: 'اللهم أنت ربي لا إله إلا أنت خلقتني وأنا عبدك وأنا على عهدك ووعدك ما استطعت.' },
+      { category: 'morning', type: 'dhikr', title: 'حسبي الله صباحًا', text: 'حسبي الله لا إله إلا هو عليه توكلت وهو رب العرش العظيم، سبع مرات.' },
+      { category: 'evening', type: 'dhikr', title: 'أذكار المساء', text: 'أمسينا وأمسى الملك لله، والحمد لله، لا إله إلا الله وحده لا شريك له.' },
+      { category: 'evening', type: 'dhikr', title: 'آية الكرسي مساءً', text: 'اقرأ آية الكرسي مرة واحدة في المساء: الله لا إله إلا هو الحي القيوم...' },
+      { category: 'evening', type: 'dhikr', title: 'المعوذات مساءً', text: 'قل هو الله أحد، وقل أعوذ برب الفلق، وقل أعوذ برب الناس، ثلاث مرات.' },
+      { category: 'evening', type: 'dhikr', title: 'سيد الاستغفار مساءً', text: 'اللهم أنت ربي لا إله إلا أنت خلقتني وأنا عبدك وأنا على عهدك ووعدك ما استطعت.' },
+      { category: 'evening', type: 'dhikr', title: 'أعوذ بكلمات الله', text: 'أعوذ بكلمات الله التامات من شر ما خلق، ثلاث مرات.' },
+      { category: 'sleep', type: 'dhikr', title: 'ذكر النوم', text: 'باسمك اللهم أموت وأحيا.' },
+      { category: 'wake', type: 'dhikr', title: 'ذكر الاستيقاظ', text: 'الحمد لله الذي أحيانا بعدما أماتنا وإليه النشور.' },
+      { category: 'istighfar', type: 'dhikr', title: 'الاستغفار', text: 'أستغفر الله العظيم الذي لا إله إلا هو الحي القيوم وأتوب إليه.' },
+      { category: 'istighfar', type: 'dhikr', title: 'سيد الاستغفار', text: 'اللهم أنت ربي لا إله إلا أنت خلقتني وأنا عبدك وأنا على عهدك ووعدك ما استطعت.' },
+      { category: 'tasbih', type: 'dhikr', title: 'الباقيات الصالحات', text: 'سبحان الله، والحمد لله، ولا إله إلا الله، والله أكبر.' },
+      { category: 'tasbih', type: 'dhikr', title: 'تسبيح خفيف عظيم', text: 'سبحان الله وبحمده، سبحان الله العظيم.' },
+      { category: 'tasbih', type: 'dhikr', title: 'الحوقلة', text: 'لا حول ولا قوة إلا بالله.' },
+      { category: 'dhikr', type: 'dhikr', title: 'الصلاة على النبي', text: 'اللهم صل وسلم وبارك على نبينا محمد.' },
+      { category: 'duaa', type: 'duaa', title: 'دعاء جامع', text: 'ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة وقنا عذاب النار.' },
+      { category: 'duaa', type: 'duaa', title: 'دعاء المغفرة', text: 'رب اغفر لي وتب علي إنك أنت التواب الرحيم.' },
+      { category: 'duaa', type: 'duaa', title: 'دعاء العلم', text: 'رب زدني علمًا.' },
+      { category: 'duaa', type: 'duaa', title: 'دعاء الرحمة', text: 'ربنا لا تزغ قلوبنا بعد إذ هديتنا وهب لنا من لدنك رحمة إنك أنت الوهاب.' },
+      { category: 'duaa', type: 'duaa', title: 'دعاء التيسير', text: 'اللهم لا سهل إلا ما جعلته سهلًا وأنت تجعل الحزن إذا شئت سهلًا.' },
+      { category: 'duaa', type: 'duaa', title: 'دعاء الوالدين', text: 'رب ارحمهما كما ربياني صغيرًا.' },
+      { category: 'duaa', type: 'duaa', title: 'دعاء الحفظ', text: 'اللهم احفظني من بين يدي ومن خلفي وعن يميني وعن شمالي ومن فوقي.' }
+    ];
+    let currentDhikrFilter = 'all';
+    let tasbihCount = getStorage('tasbihCount', 0);
+    let reminderTimer = null;
+
+    const allahNames = [
+      'الله','الرحمن','الرحيم','الملك','القدوس','السلام','المؤمن','المهيمن','العزيز','الجبار','المتكبر','الخالق','البارئ','المصور','الغفار','القهار','الوهاب','الرزاق','الفتاح','العليم','القابض','الباسط','الخافض','الرافع','المعز','المذل','السميع','البصير','الحكم','العدل','اللطيف','الخبير','الحليم','العظيم','الغفور','الشكور','العلي','الكبير','الحفيظ','المقيت','الحسيب','الجليل','الكريم','الرقيب','المجيب','الواسع','الحكيم','الودود','المجيد','الباعث','الشهيد','الحق','الوكيل','القوي','المتين','الولي','الحميد','المحصي','المبدئ','المعيد','المحيي','المميت','الحي','القيوم','الواجد','الماجد','الواحد','الصمد','القادر','المقتدر','المقدم','المؤخر','الأول','الآخر','الظاهر','الباطن','الوالي','المتعالي','البر','التواب','المنتقم','العفو','الرؤوف','مالك الملك','ذو الجلال والإكرام','المقسط','الجامع','الغني','المغني','المانع','الضار','النافع','النور','الهادي','البديع','الباقي','الوارث','الرشيد','الصبور'
+    ];
+
+    const prophetStories = [
+      { title: 'آدم عليه السلام', text: 'خلق الله آدم عليه السلام وكرمه وعلّمه الأسماء، ثم أسكنه الجنة مع زوجه. ولما وقع الخطأ، لم ييأس آدم من رحمة الله، بل تاب ورجع إلى ربه، فقبل الله توبته.\n\nقصة آدم تعلمنا أن الإنسان قد يخطئ، لكن الباب الأجمل هو الرجوع إلى الله. لا تجعل الخطأ نهاية الطريق، بل اجعله بداية توبة أصدق وقلب أقرب.' },
+      { title: 'نوح عليه السلام', text: 'دعا نوح عليه السلام قومه زمنًا طويلًا إلى عبادة الله وحده، فكان يصبر عليهم ويدعوهم ليلًا ونهارًا، سرًا وجهارًا. ومع طول الدعوة وقلة الاستجابة، لم يترك رسالته ولم يضعف يقينه.\n\nوفي قصته نتعلم أن صاحب الحق يحتاج صبرًا طويلًا، وأن النتائج بيد الله. افعل الخير، واثبت عليه، ولا تستعجل الثمرة.' },
+      { title: 'إبراهيم عليه السلام', text: 'نشأ إبراهيم عليه السلام محبًا للتوحيد، يبحث عن الحق ويكره عبادة الأصنام. وقف وحده أمام قومه يدعوهم إلى الله، ثم ابتلي في حياته بابتلاءات عظيمة، فكان في كل مرة يختار رضا الله.\n\nقصة إبراهيم تعلمنا أن الإيمان ليس كلامًا فقط، بل ثقة وتضحية ويقين. إذا امتلأ القلب بالله، صار العبد قويًا ولو كان وحده.' },
+      { title: 'يوسف عليه السلام', text: 'مر يوسف عليه السلام بمراحل صعبة: فراق أهله، ثم ظلم، ثم سجن، لكنه بقي عفيفًا صابرًا محسنًا. لم ينس الله في شدته، ولم ينتقم حين قدر، بل عفا وصفح.\n\nقصة يوسف تعلمنا أن الطريق قد يكون طويلًا، لكن الله يدبر بلطف. قد تخفى الحكمة اليوم، ثم تظهر بعد زمن فتقول: كان لطف الله أكبر مما ظننت.' },
+      { title: 'موسى عليه السلام', text: 'ولد موسى عليه السلام في زمن خوف، ثم حفظه الله بطريقة عجيبة حتى تربى في قصر فرعون. ولما كبر، أرسله الله برسالة عظيمة إلى طاغية متكبر، فواجهه موسى بقلب متوكل ولسان يذكر الله.\n\nقصته تعلمنا أن الله ينصر الضعيف إذا صدق، وأن الظلم مهما طال لا يغلب وعد الله. خذ بالأسباب، وقل: رب اشرح لي صدري.' },
+      { title: 'عيسى عليه السلام', text: 'كان عيسى عليه السلام رسولًا كريمًا أيده الله بالبينات والمعجزات، ودعا الناس إلى عبادة الله وحده، وإلى الرحمة والطهارة وحسن الخلق. كان في قصته تذكير بأن القدرة كلها لله.\n\nنتعلم من سيرته أن الدعوة إلى الله تكون بالنقاء والرحمة، وأن العبد إذا أيّده الله فلا يضره كيد الناس.' },
+      { title: 'محمد صلى الله عليه وسلم', text: 'محمد ﷺ خاتم الأنبياء ورحمة الله للعالمين. عاش صادقًا أمينًا، ودعا إلى التوحيد، وتحمل الأذى، وبنى أمة بالقرآن والرحمة والأخلاق. كان في بيته رحيمًا، ومع أصحابه رفيقًا، ومع أعدائه عادلًا.\n\nسيرته تعلمنا أن أعظم طريق للحياة الطيبة هو اتباع هديه: صدق، أمانة، رحمة، صلاة، قرآن، وصبر جميل.' }
+    ];
+    const seerahStories = [
+      { title: 'مولد النبي ﷺ', text: 'ولد النبي محمد ﷺ في مكة في بيت كريم النسب، ونشأ يتيم الأب ثم فقد أمه وهو صغير، فكانت حياته منذ بدايتها تربية على الصبر والاعتماد على الله. ومع أنه فقد أعز الناس، أحاطه الله برعاية جده عبد المطلب ثم عمه أبي طالب.\n\nفي مولده ونشأته معنى عظيم: قد يبدأ الإنسان حياته بابتلاء، لكن الله يخبئ له رسالة وكرامة. لا تقيس مستقبلك ببداية صعبة، فربك لطيف يدبر الأمر.' },
+      { title: 'الصادق الأمين', text: 'قبل أن ينزل الوحي، كان أهل مكة يعرفون النبي ﷺ بالصادق الأمين. كانوا يضعون عنده أماناتهم، ويصدقونه إذا تكلم، ويعرفون أنه لا يخون ولا يكذب. كانت أخلاقه شهادة له قبل أن يدعوهم.\n\nهذه القصة تعلمنا أن الأخلاق طريق للدعوة. كن صادقًا في كلامك، أمينًا في وعدك، لطيفًا في معاملتك، فإن الناس ترى الدين في سلوك صاحبه قبل كلامه.' },
+      { title: 'غار حراء وبداية الوحي', text: 'كان النبي ﷺ يذهب إلى غار حراء يتعبد ويتفكر في خلق الله، بعيدًا عن ضوضاء الناس. وفي ليلة عظيمة جاءه جبريل عليه السلام بالوحي، فبدأت رسالة النور بكلمة: اقرأ.\n\nنتعلم من هذه المحطة أن القلب يحتاج لحظات هدوء مع الله، وأن العلم والقراءة باب كبير للهداية. اجعل لك وقتًا قصيرًا كل يوم تتأمل وتقرأ وتذكر الله.' },
+      { title: 'الصبر في الدعوة', text: 'لما بدأ النبي ﷺ يدعو قومه إلى عبادة الله وحده، واجه سخرية وأذى ورفضًا، لكنه لم يرد الإساءة بمثلها. كان يدعو بالحكمة، ويصبر، ويعلم أن الهداية من عند الله.\n\nهذه القصة تعلمنا أن الطريق الصحيح قد لا يكون سهلًا، وأن المؤمن لا يترك الخير لأن الناس لم يفهموه. اصبر، وابق رحيمًا، ولا تجعل قسوة الآخرين تغير طيبة قلبك.' },
+      { title: 'الهجرة إلى المدينة', text: 'اشتد الأذى على المسلمين في مكة، فأذن الله للنبي ﷺ بالهجرة إلى المدينة. خرج ومعه أبو بكر رضي الله عنه، واتخذا الأسباب، واختبآ في الغار، ثم وصلا إلى المدينة حيث بدأ عهد جديد.\n\nالهجرة تعلمنا أن المؤمن يجمع بين التوكل والعمل. لا يكفي أن تتمنى الفرج، بل خذ بالأسباب، وثق أن الله يفتح بعد الضيق بابًا واسعًا.' },
+      { title: 'المؤاخاة بين المسلمين', text: 'بعد الهجرة، آخى النبي ﷺ بين المهاجرين والأنصار، فصار الغريب يجد أخًا، والمحتاج يجد من يواسيه، والمجتمع الجديد يقوم على المحبة والتعاون.\n\nهذه القصة تعلمنا أن القوة ليست في المال وحده، بل في القلوب المتراحمة. إذا ساعدت غيرك، شاركت في بناء مجتمع يحبه الله.' },
+      { title: 'رحمته ﷺ بالأطفال', text: 'كان النبي ﷺ يرحم الأطفال، يحملهم، ويلاطفهم، ويخفف الصلاة إذا سمع بكاء طفل رحمة بأمه. لم يكن يرى الصغار شيئًا هامشيًا، بل كان يعطيهم من اللطف والاهتمام.\n\nنتعلم أن الرحمة خلق كبير، وأن البيت الذي فيه لين ورفق بيت قريب من هدي النبي ﷺ. عامل الصغير بحب، والكبير باحترام، والضعيف بعطف.' },
+      { title: 'حجة الوداع', text: 'في حجة الوداع وقف النبي ﷺ يخطب في الناس، يوصيهم بتقوى الله، وبحفظ الدماء والأموال، وبالإحسان للنساء، وبالتمسك بكتاب الله. كانت وصاياه جامعة، كأنها خريطة حياة للأمة.\n\nهذه المحطة تعلمنا أن الدين يحفظ الحقوق، ويقيم العدل، ويجعل التقوى أساس التعامل. من أراد طريقًا واضحًا فليتمسك بالقرآن وهدي النبي ﷺ.' }
+      ,
+      { title: 'فتح مكة', text: 'بعد سنوات من الأذى والإخراج والقتال، عاد النبي ﷺ إلى مكة فاتحًا منتصرًا. كان يستطيع أن ينتقم ممن آذوه، لكنه دخل متواضعًا شاكرًا لله، ثم قال لأهل مكة ما معناه: اذهبوا فأنتم الطلقاء.\n\nكان فتح مكة درسًا عظيمًا في العفو عند القدرة. فالإنسان قد يعفو لأنه ضعيف، لكن النبي ﷺ عفا وهو قادر، فكان عفوه أعظم وأبلغ.\n\nهذه القصة تعلمنا أن النصر الحقيقي ليس أن تكسر من أمامك، بل أن تملك قلبك عند القدرة، وأن تجعل الرحمة فوق الانتقام.' },
+      { title: 'بناء المسجد النبوي', text: 'عندما وصل النبي ﷺ إلى المدينة، كان من أول الأعمال بناء المسجد. لم يكن المسجد مكان صلاة فقط، بل كان مدرسة، ومجلس شورى، ومكان اجتماع وتربية، ومنه بدأت ملامح المجتمع المسلم.\n\nشارك النبي ﷺ أصحابه في العمل، يحمل معهم ويعينهم، ليعلمهم أن القائد الصالح لا يكتفي بالأمر، بل يشارك ويقترب من الناس.\n\nقصة بناء المسجد تعلمنا أن البداية الصحيحة لأي مجتمع تكون بربط القلوب بالله، وبناء مكان يجمع الناس على الخير والعلم والمحبة.' }
+    ];
+    const seerahVideos = [
+      {
+        title: 'الشيخ بدر المشاري - حلقات السيرة من زاد الآخرة',
+        speaker: 'بدر المشاري',
+        text: 'سلسلة مشهورة بأسلوب قصصي مؤثر عن حياة النبي ﷺ. افتح الرابط وابحث عن الحلقات من القنوات الواضحة أو الرسمية.',
+        url: 'https://www.youtube.com/results?search_query=%D8%A8%D8%AF%D8%B1+%D8%A7%D9%84%D9%85%D8%B4%D8%A7%D8%B1%D9%8A+%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D8%A9+%D8%A7%D9%84%D9%86%D8%A8%D9%88%D9%8A%D8%A9+%D8%B2%D8%A7%D8%AF+%D8%A7%D9%84%D8%A2%D8%AE%D8%B1%D8%A9'
+      },
+      {
+        title: 'الشيخ سمير مصطفى - السيرة النبوية',
+        speaker: 'سمير مصطفى',
+        text: 'دروس ومحاضرات في السيرة والرقائق، مع اهتمام بالمعاني الإيمانية والتربوية.',
+        url: 'https://www.youtube.com/results?search_query=%D8%B3%D9%85%D9%8A%D8%B1+%D9%85%D8%B5%D8%B7%D9%81%D9%89+%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D8%A9+%D8%A7%D9%84%D9%86%D8%A8%D9%88%D9%8A%D8%A9'
+      },
+      {
+        title: 'الدكتور راغب السرجاني - السيرة النبوية والتاريخ الإسلامي',
+        speaker: 'راغب السرجاني',
+        text: 'محتوى مرتب في التاريخ والسيرة، ويشتهر بالعرض المنهجي للأحداث والدروس.',
+        url: 'https://www.youtube.com/results?search_query=%D8%B1%D8%A7%D8%BA%D8%A8+%D8%A7%D9%84%D8%B3%D8%B1%D8%AC%D8%A7%D9%86%D9%8A+%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D8%A9+%D8%A7%D9%84%D9%86%D8%A8%D9%88%D9%8A%D8%A9'
+      },
+      {
+        title: 'الشيخ عثمان الخميس - دروس مختارة في السيرة',
+        speaker: 'عثمان الخميس',
+        text: 'دروس ومحاضرات بأسلوب علمي مباشر، ويفضل البحث عن المقاطع من القنوات الرسمية.',
+        url: 'https://www.youtube.com/results?search_query=%D8%B9%D8%AB%D9%85%D8%A7%D9%86+%D8%A7%D9%84%D8%AE%D9%85%D9%8A%D8%B3+%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D8%A9+%D8%A7%D9%84%D9%86%D8%A8%D9%88%D9%8A%D8%A9'
+      },
+      {
+        title: 'الشيخ صالح المغامسي - وقفات من السيرة',
+        speaker: 'صالح المغامسي',
+        text: 'وقفات إيمانية وبلاغية من أحداث السيرة، مناسبة لمن يحب الأسلوب الهادئ.',
+        url: 'https://www.youtube.com/results?search_query=%D8%B5%D8%A7%D9%84%D8%AD+%D8%A7%D9%84%D9%85%D8%BA%D8%A7%D9%85%D8%B3%D9%8A+%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D8%A9+%D8%A7%D9%84%D9%86%D8%A8%D9%88%D9%8A%D8%A9'
+      },
+      {
+        title: 'الدكتور محمد راتب النابلسي - شمائل وسيرة النبي ﷺ',
+        speaker: 'محمد راتب النابلسي',
+        text: 'دروس عن الشمائل والمعاني التربوية في حياة النبي ﷺ، بأسلوب وعظي هادئ.',
+        url: 'https://www.youtube.com/results?search_query=%D9%85%D8%AD%D9%85%D8%AF+%D8%B1%D8%A7%D8%AA%D8%A8+%D8%A7%D9%84%D9%86%D8%A7%D8%A8%D9%84%D8%B3%D9%8A+%D8%B4%D9%85%D8%A7%D8%A6%D9%84+%D8%A7%D9%84%D9%86%D8%A8%D9%8A'
+      }
+    ];
+    const bedtimeStories = [
+      { title: 'الطفل والصدقة الصغيرة', text: 'في آخر النهار، كان طفل صغير يجلس مع أسرته، وفي يده قطعة خبز يحبها. وبينما هو ينظر من النافذة، رأى رجلًا فقيرًا يبدو عليه التعب والجوع. تردد الطفل لحظة، ثم قطع الخبز نصفين، وأعطى الرجل نصفه.\n\nرجع الطفل إلى بيته وهو يشعر بسعادة غريبة. لم يكن ما فعله كبيرًا في نظر الناس، لكنه شعر أن قلبه صار أوسع. أخبرته أمه أن الصدقة إذا خرجت من قلب صادق، بارك الله فيها ولو كانت قليلة.', ending: 'نم وقلبك يحب الخير، فالله يرى العمل الصغير إذا كان صادقًا.' },
+      { title: 'العصفور والماء', text: 'في يوم حار، وجد ولد عصفورًا صغيرًا يقف قرب الشباك، يفتح منقاره كأنه يبحث عن ماء. أسرع الولد إلى المطبخ، وملأ غطاء صغيرًا بالماء، ووضعه بهدوء بعيدًا حتى لا يخيف العصفور.\n\nاقترب العصفور وشرب، ثم طار فوق الشجرة كأنه يشكر بطريقته. ابتسم الولد، وشعر أن الرحمة لا تحتاج كلامًا كثيرًا. يكفي أن ترى محتاجًا فتساعده بما تستطيع.', ending: 'ارحم خلق الله، يملأ الله قلبك بالسكينة.' },
+      { title: 'الأمانة في الحقيبة', text: 'وجدت بنت صغيرة حقيبة في ساحة المدرسة. فتحتها قليلًا فعرفت أن فيها أشياء ثمينة، لكنها لم تمد يدها إلى شيء. حملت الحقيبة وذهبت بها إلى المعلمة، وقالت: وجدت هذه ولا أعرف صاحبها.\n\nبعد قليل جاءت صاحبة الحقيبة وهي قلقة، فلما وجدتها فرحت ودعت للبنت. في ذلك اليوم فهمت البنت أن الأمانة ليست مجرد كلمة، بل قرار تأخذه حين لا يراك أحد إلا الله.', ending: 'قبل النوم قل: يا رب اجعلني أمينًا صادقًا.' },
+      { title: 'دعاء قبل النوم', text: 'كان طفل يخاف إذا أطفئت الأنوار، ويظن أن الليل طويل. جلست أمه بجانبه، وقالت له: إذا خفت، فاذكر أن الله قريب، يسمعك ويحفظك. ثم علمته أن يقول أذكار النوم ويدعو بهدوء.\n\nفي الليلة التالية، أغمض الطفل عينيه وذكر الله، فشعر أن قلبه أهدأ. لم يتغير الليل، لكن قلبه تغير؛ صار يعرف أن حفظ الله أكبر من كل خوف.', ending: 'اذكر الله بهدوء، واترك خوفك عند باب رحمته.' },
+      { title: 'كلمة طيبة', text: 'عاد أخ صغير من يوم طويل وكان حزينًا لأنه أخطأ في درسه. جلس وحده لا يريد الكلام. اقترب منه أخوه وقال له: أنت حاولت، وغدًا ستكون أفضل بإذن الله. كانت الجملة قصيرة، لكنها أضاءت وجهه.\n\nفي تلك الليلة عرف الأخ أن الكلمة الطيبة قد ترفع قلب إنسان. لا تحتاج دائمًا إلى مال أو هدية؛ أحيانًا تكفي كلمة رحيمة تذكر غيرك بالأمل.', ending: 'اختم يومك بكلمة طيبة أو دعاء جميل لمن تحب.' },
+      { title: 'الوضوء والنوم الهادئ', text: 'قبل النوم، توضأ طفل بهدوء، ثم جلس على سريره وقرأ ما يحفظ من القرآن. لم يكن صوته عاليًا، لكنه كان يشعر أن الغرفة صارت أهدأ، وأن يومه انتهى بالقرب من الله.\n\nتذكر الطفل مواقف يومه: كلمة قالها، وخطأ يريد أن يصلحه، ونعمة يريد أن يشكر الله عليها. ثم نام وهو يقول في قلبه: الحمد لله.', ending: 'ليكن آخر ما في يومك ذكرًا وشكرًا لله.' }
+    ];
+    const storyCategories = [
+      {
+        id: 'quran',
+        title: 'قصص القرآن',
+        videos: [
+          { title: 'د. راغب السرجاني - قصص القرآن', url: 'https://www.youtube.com/results?search_query=%D8%B1%D8%A7%D8%BA%D8%A8+%D8%A7%D9%84%D8%B3%D8%B1%D8%AC%D8%A7%D9%86%D9%8A+%D9%82%D8%B5%D8%B5+%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86' },
+          { title: 'د. عمر عبد الكافي - قصص القرآن', url: 'https://www.youtube.com/results?search_query=%D8%B9%D9%85%D8%B1+%D8%B9%D8%A8%D8%AF+%D8%A7%D9%84%D9%83%D8%A7%D9%81%D9%8A+%D9%82%D8%B5%D8%B5+%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86' }
+        ],
+        stories: [
+          { title: 'أصحاب الكهف', text: 'كان هناك فتية آمنوا بربهم في زمن انتشر فيه الباطل، فاختاروا أن يحفظوا إيمانهم ولو خسروا راحة الدنيا. خرجوا من قومهم ولجؤوا إلى الكهف، لا يملكون قوة ولا جيشًا، لكنهم يملكون قلبًا ثابتًا يقول: ربنا آتنا من لدنك رحمة.\n\nنام الفتية في الكهف سنين طويلة بأمر الله، ثم أيقظهم الله ليكونوا آية للناس. لم تكن القصة مجرد نوم طويل، بل رسالة أن الله يحفظ من صدق معه، وأن الثبات على الإيمان أعظم من رضا الناس.\n\nنتعلم من أصحاب الكهف أن الصحبة الصالحة تعين على النجاة، وأن الشاب المؤمن يستطيع أن يكون كبيرًا عند الله إذا اختار الحق.' },
+          { title: 'صاحب الجنتين', text: 'ذكر القرآن قصة رجل آتاه الله جنتين جميلتين، فاغتر بما عنده وظن أن النعمة باقية بقوته وماله. كان يدخل جنته وهو معجب بما يرى، وينظر إلى الثمر والماء والزينة كأنها شيء لا يزول.\n\nكان له صاحب مؤمن يذكره بالله، لا يحسده على النعمة، لكنه يخاف عليه من الغرور. قال له بمعنى النصيحة: هلا إذا دخلت جنتك قلت ما شاء الله لا قوة إلا بالله. فالنعمة لا تحفظ بالتكبر، بل بالشكر والاعتراف بفضل الله.\n\nلكن صاحب الجنتين لم يسمع النصيحة، وظن أن ماله يحميه. فجاء أمر الله على جنته، فأصبحت خاوية، وصار يقلب كفيه ندمًا على ما أنفق فيها. عندها عرف أن القوة لله وحده، وأن الإنسان فقير مهما امتلك.\n\nهذه القصة تعلمنا أن المال والجمال والنجاح لا قيمة لها إذا جعلت القلب متكبرًا. قل دائمًا: الحمد لله، وما شاء الله لا قوة إلا بالله.' },
+          { title: 'قارون وكنوزه', text: 'كان قارون من قوم موسى عليه السلام، وآتاه الله مالًا عظيمًا حتى إن مفاتيح خزائنه كانت ثقيلة على الرجال الأقوياء. بدل أن يشكر الله، تكبر على الناس ونسب الفضل إلى نفسه وقال إنما أوتيته على علم عندي.\n\nنصحه الصالحون وقالوا له: لا تفرح فرح غرور، وابتغ فيما آتاك الله الدار الآخرة، ولا تنس نصيبك من الدنيا، وأحسن كما أحسن الله إليك. كانت النصيحة واضحة: المال نعمة إذا صار طريقًا للخير، ونقمة إذا صار طريقًا للكبر.\n\nخرج قارون على قومه في زينته، فتمنى بعض الناس ما عنده. لكن أهل العلم قالوا: ويلكم ثواب الله خير لمن آمن وعمل صالحًا. ثم جاء أمر الله، فخسف به وبداره الأرض، فعرف الناس أن الغنى الحقيقي هو رضا الله.\n\nقصة قارون تعلمنا ألا نغتر بالمال، وألا نقيس قيمة الإنسان بما يملك، بل بما يحمل في قلبه من إيمان وشكر وتواضع.' },
+          { title: 'أصحاب الفيل', text: 'أراد أبرهة أن يهدم الكعبة، وجهز جيشًا عظيمًا ومعه فيل كبير ليخيف الناس. كان أهل مكة لا يملكون قوة تقف أمام هذا الجيش، لكن البيت بيت الله، والله يحمي ما شاء كيف شاء.\n\nتقدم الجيش نحو مكة، وحصلت أحداث عجيبة، حتى أرسل الله عليهم طيرًا أبابيل ترميهم بحجارة من سجيل، فجعلهم كعصف مأكول. انتهى جيش أبرهة رغم عدته، وبقي بيت الله محفوظًا.\n\nهذه القصة تعلمنا أن القوة ليست دائمًا في العدد والسلاح، وأن من تكبر على حرمات الله أخذه الله. كما تعلمنا أن الله يدبر الأمر من حيث لا يتوقع الناس.' }
+        ]
+      },
+      {
+        id: 'prophets',
+        title: 'قصص الأنبياء',
+        videos: [
+          { title: 'بدر المشاري - قصص الأنبياء', url: 'https://www.youtube.com/results?search_query=%D8%A8%D8%AF%D8%B1+%D8%A7%D9%84%D9%85%D8%B4%D8%A7%D8%B1%D9%8A+%D9%82%D8%B5%D8%B5+%D8%A7%D9%84%D8%A3%D9%86%D8%A8%D9%8A%D8%A7%D8%A1' },
+          { title: 'نبيل العوضي - قصص الأنبياء', url: 'https://www.youtube.com/results?search_query=%D9%86%D8%A8%D9%8A%D9%84+%D8%A7%D9%84%D8%B9%D9%88%D8%B6%D9%8A+%D9%82%D8%B5%D8%B5+%D8%A7%D9%84%D8%A3%D9%86%D8%A8%D9%8A%D8%A7%D8%A1' }
+        ],
+        stories: prophetStories
+      },
+      {
+        id: 'companions',
+        title: 'قصص الصحابة',
+        videos: [
+          { title: 'عثمان الخميس - سير الصحابة', url: 'https://www.youtube.com/results?search_query=%D8%B9%D8%AB%D9%85%D8%A7%D9%86+%D8%A7%D9%84%D8%AE%D9%85%D9%8A%D8%B3+%D8%B3%D9%8A%D8%B1+%D8%A7%D9%84%D8%B5%D8%AD%D8%A7%D8%A8%D8%A9' },
+          { title: 'راغب السرجاني - الصحابة', url: 'https://www.youtube.com/results?search_query=%D8%B1%D8%A7%D8%BA%D8%A8+%D8%A7%D9%84%D8%B3%D8%B1%D8%AC%D8%A7%D9%86%D9%8A+%D8%A7%D9%84%D8%B5%D8%AD%D8%A7%D8%A8%D8%A9' }
+        ],
+        stories: [
+          { title: 'أبو بكر الصديق رضي الله عنه', text: 'كان أبو بكر رضي الله عنه صاحب النبي ﷺ وأقرب الناس إليه، آمن به من أول الطريق ولم يتردد. يوم كذّب الناس، صدّق. ويوم اشتد الخوف في الهجرة، كان مع النبي ﷺ في الغار، يطمئنه النبي بقوله: لا تحزن إن الله معنا.\n\nلم تكن عظمة أبي بكر في موقف واحد، بل في حياة كاملة من الصدق والبذل. أنفق ماله في نصرة الدين، وثبت بعد وفاة النبي ﷺ حين اضطربت القلوب.\n\nقصته تعلمنا أن الصديق الحقيقي يظهر وقت الشدة، وأن الصدق مع الله يجعل الإنسان ثابتًا حين يتغير الناس.' },
+          { title: 'عمر بن الخطاب رضي الله عنه', text: 'كان عمر قويًا في الحق، فلما دخل الإسلام تغيرت قوته من غضب إلى عدل، ومن شدة إلى نصرة للمظلوم. كان إسلامه فرحًا للمسلمين وقوة للدعوة، لأنه لم يكن يخاف في الله لومة لائم.\n\nلما صار خليفة، كان يخاف الله في رعيته، ويسأل نفسه عن مسؤوليته حتى في أبسط الأمور. لم يكن يرى المنصب تشريفًا فقط، بل أمانة ثقيلة. كان يخرج ليلًا يتفقد أحوال الناس، ويهتم بالضعيف قبل القوي.\n\nلم يكن عدل عمر شعارًا، بل حياة يعيشها. كان يرى أن الناس عند الحق سواء، وأن القائد لا ينجو إلا إذا عدل واتقى الله.\n\nقصته تعلمنا أن القوة نعمة إذا قادها الإيمان، وأن العدل عبادة عظيمة لا يقوم بها إلا قلب يخاف الله.' },
+          { title: 'عثمان بن عفان رضي الله عنه', text: 'كان عثمان رضي الله عنه مشهورًا بالحياء والكرم، ومن السابقين إلى الإسلام. رزقه الله مالًا، فجعل ماله طريقًا للخير وخدمة المسلمين. جهز جيش العسرة، واشترى بئر رومة ليشرب الناس، فصار كرمه بابًا من أبواب الأجر.\n\nكان لينًا حليمًا، يحب القرآن، حتى ختمت حياته وهو قريب من كتاب الله. ومع الفتن التي وقعت في آخر زمانه، بقي صابرًا محتسبًا، لا يريد أن يكون سببًا في إراقة دماء المسلمين.\n\nقصة عثمان تعلمنا أن المال إذا وضع في طاعة الله صار بركة، وأن الحياء خلق عظيم، وأن اللين لا يعني ضعفًا بل قد يكون من أعلى درجات القوة.' },
+          { title: 'علي بن أبي طالب رضي الله عنه', text: 'نشأ علي رضي الله عنه في بيت النبي ﷺ، وكان من أوائل من آمن به. عرف بالشجاعة والعلم والفصاحة، وكان يحب الله ورسوله ويحبه الله ورسوله. في المواقف الصعبة كان ثابتًا، وفي العلم كان بحرًا يرجع إليه الناس.\n\nلم تكن شجاعة علي مجرد قوة في القتال، بل كانت شجاعة في الحق، وحرصًا على العدل، وفهمًا عميقًا للدين. كان يعلم أن الدنيا زائلة، وأن قيمة الإنسان في إيمانه وعمله.\n\nقصته تعلمنا أن العلم والشجاعة إذا اجتمعا مع التقوى صنعا شخصية عظيمة، وأن القرب من القرآن والسنة يرفع الإنسان في الدنيا والآخرة.' }
+        ]
+      },
+      {
+        id: 'femaleCompanions',
+        title: 'قصص الصحابيات',
+        videos: [
+          { title: 'قصص الصحابيات - محاضرات موثوقة', url: 'https://www.youtube.com/results?search_query=%D9%82%D8%B5%D8%B5+%D8%A7%D9%84%D8%B5%D8%AD%D8%A7%D8%A8%D9%8A%D8%A7%D8%AA+%D9%85%D8%AD%D8%A7%D8%B6%D8%B1%D8%A7%D8%AA' },
+          { title: 'أم عمارة نسيبة بنت كعب', url: 'https://www.youtube.com/results?search_query=%D8%A3%D9%85+%D8%B9%D9%85%D8%A7%D8%B1%D8%A9+%D9%86%D8%B3%D9%8A%D8%A8%D8%A9+%D8%A8%D9%86%D8%AA+%D9%83%D8%B9%D8%A8' }
+        ],
+        stories: [
+          { title: 'أم عمارة نسيبة بنت كعب رضي الله عنها', text: 'كانت أم عمارة من الصحابيات العظيمات، شهدت مواقف نصرة للدين، واشتهرت بثباتها وشجاعتها. في يوم أحد، لما اشتد الأمر حول النبي ﷺ، كانت تدافع وتحمي وتثبت.\n\nلم تكن شجاعتها مجرد قوة بدن، بل قوة إيمان ومحبة للنبي ﷺ. بذلت ما تستطيع في وقت احتاج فيه الموقف إلى قلوب ثابتة.\n\nقصتها تعلمنا أن المرأة المؤمنة لها دور عظيم في نصرة الحق، وأن الشجاعة تكون أحيانًا في كلمة، وأحيانًا في موقف، وأحيانًا في صبر طويل.' },
+          { title: 'أسماء بنت أبي بكر رضي الله عنها', text: 'كان لأسماء رضي الله عنها دور عظيم في الهجرة، إذ كانت تحمل الطعام للنبي ﷺ وأبيها أبي بكر وهما في الغار. كانت تعرف خطورة الطريق، وتعلم أن قريشًا تبحث عنهما، لكنها أدت دورها بإيمان وثبات.\n\nوسميت بذات النطاقين لأنها شقت نطاقها لتربط به الزاد. موقف بسيط في ظاهره، لكنه كان جزءًا من حدث عظيم غير مجرى التاريخ. لم تكن في مقدمة المشهد، لكن الله يعلم قيمة عملها.\n\nقصتها تعلمنا أن الأعمال الصغيرة إذا كانت في خدمة الحق صارت عظيمة، وأن الثبات لا يكون بالكلام فقط بل بالفعل.' },
+          { title: 'سمية بنت خياط رضي الله عنها', text: 'كانت سمية رضي الله عنها من أوائل من دخلوا الإسلام، وكانت امرأة ضعيفة في نظر أهل مكة، لكنها كانت قوية بإيمانها. تعرضت للأذى الشديد لأنها آمنت بالله وحده، لكنها ثبتت ولم تترك دينها.\n\nلم تكن تملك مالًا ولا قوة تحميها، لكنها ملكت قلبًا لا يساوم على الإيمان. وصارت قصتها علامة على أن الثبات لا يقاس بالجسد، بل بما في القلب من يقين.\n\nقصة سمية تعلمنا أن طريق الحق قد يكون صعبًا، لكن الله يرفع أهل الصبر، وأن الإنسان قد يكون مستضعفًا في الأرض عظيمًا عند الله.' },
+          { title: 'أم سليم رضي الله عنها', text: 'كانت أم سليم من الصحابيات العاقلات المؤمنات، عرفت بحسن إسلامها وحكمتها. ربت ابنها أنس بن مالك رضي الله عنه على محبة النبي ﷺ، وخدم أنس النبي سنوات طويلة فتعلم منه الخير الكثير.\n\nكانت أم سليم نموذجًا للمرأة التي تجعل بيتها قريبًا من الدين، وتربي أبناءها على الطاعة والحب والخلق. لم يكن أثرها في نفسها فقط، بل امتد إلى ابنها وخدمته للعلم والسنة.\n\nقصتها تعلمنا أن التربية الصالحة عمل عظيم، وأن الأم قد تصنع بإيمانها جيلًا يحمل الخير.' }
+        ]
+      },
+      {
+        id: 'mothers',
+        title: 'قصص أمهات المؤمنين',
+        videos: [
+          { title: 'أمهات المؤمنين - دروس السيرة', url: 'https://www.youtube.com/results?search_query=%D8%A3%D9%85%D9%87%D8%A7%D8%AA+%D8%A7%D9%84%D9%85%D8%A4%D9%85%D9%86%D9%8A%D9%86+%D8%AF%D8%B1%D9%88%D8%B3+%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D8%A9' },
+          { title: 'عثمان الخميس - أمهات المؤمنين', url: 'https://www.youtube.com/results?search_query=%D8%B9%D8%AB%D9%85%D8%A7%D9%86+%D8%A7%D9%84%D8%AE%D9%85%D9%8A%D8%B3+%D8%A3%D9%85%D9%87%D8%A7%D8%AA+%D8%A7%D9%84%D9%85%D8%A4%D9%85%D9%86%D9%8A%D9%86' }
+        ],
+        stories: [
+          { title: 'خديجة رضي الله عنها', text: 'كانت خديجة رضي الله عنها أول من آمن بالنبي ﷺ، ووقفت معه حين نزل الوحي وخاف على نفسه. لم تزده خوفًا، بل طمأنته وذكّرته بصفاته الجميلة: يصل الرحم، ويحمل الكل، ويعين على نوائب الحق.\n\nكانت سندًا عظيمًا في بداية الدعوة، وبذلت مالها وقلبها ووفاءها. لذلك بقي حبها في قلب النبي ﷺ حتى بعد وفاتها.\n\nقصتها تعلمنا أن أعظم العلاقات هي التي تعين على طاعة الله، وأن الكلمة المطمئنة قد تثبت قلبًا في لحظة عظيمة.' },
+          { title: 'عائشة رضي الله عنها', text: 'كانت عائشة رضي الله عنها من أعلم نساء الأمة، نقلت كثيرًا من سنة النبي ﷺ، وسألها الصحابة في العلم والفقه. جمعت بين الذكاء والحفظ والقرب من بيت النبوة.\n\nكانت بيتها مدرسة علم، يسمع الناس منها ما رأت وما حفظت من هدي النبي ﷺ. لم تكن قصتها مجرد مكانة زوجة النبي ﷺ، بل قصة علم وخدمة للأمة. بقي علمها ينتفع به المسلمون جيلًا بعد جيل.\n\nقصتها تعلمنا أن طلب العلم شرف، وأن المرأة المؤمنة تستطيع أن تكون باب هداية ومعرفة للناس.' },
+          { title: 'أم سلمة رضي الله عنها', text: 'كانت أم سلمة رضي الله عنها من النساء الحكيمات الصابرات. هاجرت وتحملت فراقًا وألمًا، ثم أكرمها الله بأن صارت من أمهات المؤمنين. عرفت برجاحة عقلها وحسن مشورتها.\n\nفي مواقف من السيرة ظهرت حكمتها، فقد كانت تفهم النفوس وتختار الكلمة المناسبة في الوقت المناسب. وهذا يعلمنا أن الحكمة ليست كثرة الكلام، بل وضع الكلام والعمل في موضعه.\n\nقصتها تعلمنا الصبر عند الشدائد، وحسن الظن بالله، وأن المرأة العاقلة قد تكون سببًا في رأي سديد وموقف مبارك.' },
+          { title: 'حفصة رضي الله عنها', text: 'حفصة بنت عمر رضي الله عنها من أمهات المؤمنين، وكانت صوامة قوامة، عرفت بالعبادة والقرب من الله. أكرمها الله بأن كانت عندها الصحف التي جمع فيها القرآن في زمن أبي بكر ثم عمر رضي الله عنهما.\n\nوجود الصحف عندها يدل على مكانتها وأمانتها، وأنها كانت أهلًا لحفظ شيء عظيم. جمعت بين العبادة والأمانة، وبين شرف الصحبة وشرف حفظ كلام الله.\n\nقصتها تعلمنا أن العبادة ترفع صاحبها، وأن الأمانة قد تجعل الإنسان موضع ثقة في أمور عظيمة.' }
+        ]
+      },
+      { id: 'seerah', title: 'قصص من السيرة النبوية', videos: seerahVideos, stories: seerahStories },
+      {
+        id: 'kids',
+        title: 'قصص للأطفال',
+        videos: [{ title: 'قصص إسلامية للأطفال', url: 'https://www.youtube.com/results?search_query=%D9%82%D8%B5%D8%B5+%D8%A5%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9+%D9%84%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84' }],
+        stories: [
+          { title: 'الصدق ينجي', text: 'كان طفل صغير يلعب في البيت، فكسر كوبًا دون قصد. خاف في البداية، وفكر أن يقول إن أحدًا آخر كسره، لكنه تذكر أن الله يحب الصادقين. ذهب إلى أمه وقال لها الحقيقة.\n\nلم تفرح الأم بالكوب المكسور، لكنها فرحت بصدق ابنها. قالت له: الأشياء تعوض، لكن الصدق إذا تعود عليه القلب صار صاحبه قويًا محبوبًا.\n\nتعلم الطفل أن الصدق قد يكون صعبًا في اللحظة الأولى، لكنه يجعل القلب خفيفًا مطمئنًا.' },
+          { title: 'مساعدة الجار', text: 'رأى ولد جارهم الكبير يحمل أكياسًا ثقيلة، فترك لعبه وذهب يساعده. لم يكن الولد قويًا جدًا، لكنه حمل ما يستطيع ومشى معه حتى باب البيت.\n\nابتسم الجار ودعا له، وشعر الولد أن المساعدة الصغيرة صنعت فرحًا كبيرًا. في المساء أخبره والده أن النبي ﷺ أوصى بالجار، وأن حسن الجوار من أخلاق المسلم.\n\nتعلم الولد أن العبادة ليست في الصلاة فقط، بل في الرحمة والمساعدة وحسن الخلق.' }
+        ]
+      },
+      { id: 'bedtime', title: 'قصص قبل النوم', videos: [{ title: 'قصص دينية قبل النوم للأطفال', url: 'https://www.youtube.com/results?search_query=%D9%82%D8%B5%D8%B5+%D8%AF%D9%8A%D9%86%D9%8A%D8%A9+%D9%82%D8%A8%D9%84+%D8%A7%D9%84%D9%86%D9%88%D9%85' }], stories: bedtimeStories }
+    ];
+
+    const challenges = [
+      'اقرأ 10 آيات بتدبر.',
+      'استمع إلى سورة قصيرة كاملة.',
+      'سبح 100 مرة.',
+      'اقرأ 5 أحاديث واحفظ حديثًا واحدًا.',
+      'صل على النبي 50 مرة.',
+      'ادع لأهلك وأصدقائك بظهر الغيب.'
+    ];
+    const comfortItems = [
+      { category: 'sadness', title: 'مع الحزن', text: 'لا تحزن إن الله معنا.' },
+      { category: 'sadness', title: 'طمأنينة', text: 'ألا بذكر الله تطمئن القلوب.' },
+      { category: 'fear', title: 'مع الخوف', text: 'حسبنا الله ونعم الوكيل.' },
+      { category: 'fear', title: 'توكل', text: 'ومن يتوكل على الله فهو حسبه.' },
+      { category: 'repentance', title: 'باب التوبة', text: 'قل يا عبادي الذين أسرفوا على أنفسهم لا تقنطوا من رحمة الله.' },
+      { category: 'repentance', title: 'استغفار', text: 'ربنا ظلمنا أنفسنا وإن لم تغفر لنا وترحمنا لنكونن من الخاسرين.' },
+      { category: 'rizq', title: 'الرزق', text: 'وفي السماء رزقكم وما توعدون.' },
+      { category: 'rizq', title: 'السعة', text: 'ومن يتق الله يجعل له مخرجًا ويرزقه من حيث لا يحتسب.' }
+    ];
+    const ruqyahItems = [
+      { title: 'الفاتحة', text: 'سورة الفاتحة سبع مرات.' },
+      { title: 'آية الكرسي', text: 'الله لا إله إلا هو الحي القيوم...' },
+      { title: 'آخر آيتين من البقرة', text: 'آمن الرسول بما أنزل إليه من ربه والمؤمنون...' },
+      { title: 'الإخلاص والمعوذتان', text: 'سورة الإخلاص والفلق والناس ثلاث مرات.' },
+      { title: 'دعاء الرقية', text: 'بسم الله أرقيك من كل شيء يؤذيك، من شر كل نفس أو عين حاسد، الله يشفيك.' },
+      { title: 'دعاء الشفاء', text: 'اللهم رب الناس أذهب البأس، اشف أنت الشافي، لا شفاء إلا شفاؤك.' }
+    ];
+    const kidsItems = [
+      { title: 'الطفل الذي حفظ سورة قصيرة', text: 'كان هناك طفل صغير يحب أن يسمع القرآن من أبيه كل ليلة. وفي يوم قال لأبيه: أريد أن أحفظ سورة قصيرة حتى أقرأها في صلاتي. جلس الأب معه بهدوء، وبدأ يردد معه سورة الإخلاص آية آية.\n\nفي البداية أخطأ الطفل أكثر من مرة، لكنه لم يغضب ولم يترك الحفظ. كان كلما أخطأ ابتسم أبوه وقال له: حاول مرة أخرى، فالقرآن نور، والنور يحتاج صبرًا.\n\nوبعد أيام قليلة حفظ الطفل السورة، وقرأها في صلاته وهو يشعر بسعادة كبيرة. تعلم أن القليل إذا داوم عليه الإنسان صار كثيرًا، وأن القرآن صديق جميل للقلب.' },
+      { title: 'الذكر الذي ملأ البيت نورًا', text: 'استيقظت طفلة في الصباح وسمعت أمها تقول: الحمد لله. سألتها: لماذا تقولين ذلك كل يوم؟ قالت الأم: لأن الله أعطانا يومًا جديدًا، ونعمة الصحة، وبيتًا نعيش فيه، وقلبًا يستطيع أن يشكر.\n\nبدأت الطفلة تردد: سبحان الله، الحمد لله، الله أكبر. وفي كل مرة تقول ذكرًا كانت تشعر أن قلبها أهدأ. لم تكن الكلمات طويلة، لكنها كانت عظيمة عند الله.\n\nومن ذلك اليوم، صارت الطفلة تبدأ صباحها بالذكر، وتنام على الذكر، وتعلمت أن اللسان الصغير يستطيع أن يقول كلمات كبيرة في الميزان.' },
+      { title: 'آدم عليه السلام والتوبة الجميلة', text: 'خلق الله آدم عليه السلام وكرمه، وأسكنه الجنة. ثم وقع آدم في خطأ، لكنه لم يعاند ولم يكابر، بل رجع إلى الله وتاب وطلب المغفرة.\n\nقبل الله توبة آدم، لأن الله يحب العبد الذي يعترف بخطئه ويرجع إليه. وهنا تعلم الطفل أن الخطأ لا يعني أن الإنسان انتهى، بل المهم ماذا يفعل بعد الخطأ.\n\nإذا أخطأت فقل: يا رب اغفر لي، ثم حاول أن تصلح ما فعلت. التوبة باب جميل، والله رحيم يحب من يرجع إليه.' },
+      { title: 'يوسف عليه السلام وقلب لا يكره', text: 'كان يوسف عليه السلام صغيرًا حين ابتعد عن أبيه، ومر بأيام صعبة كثيرة. لكنه بقي صابرًا، يحسن إلى الناس، ويثق أن الله لا ينساه.\n\nومرت السنوات حتى صار يوسف في مكان عظيم، وجاء إخوته إليه وهم لا يعرفونه. كان يستطيع أن ينتقم، لكنه اختار العفو وقال كلامًا يدل على قلب طيب مؤمن.\n\nتعلم الطفل من قصة يوسف أن الصبر جميل، وأن العفو قوة، وأن الله قد يخبئ الفرج في طريق طويل لا نراه من البداية.' },
+      { title: 'الخلق الجميل في البيت', text: 'كان طفل يحب اللعب، لكنه أحيانًا يرفع صوته على أخيه ويأخذ ألعابه. في يوم جلس مع جده، فقال له الجد: المسلم الجميل ليس فقط من يصلي، بل من يكون صادقًا لطيفًا يحترم أهله.\n\nبدأ الطفل يحاول أن يقول: من فضلك، شكرًا، آسف. وفي البداية نسي كثيرًا، لكنه كان يتذكر ويحاول من جديد. وبعد مدة صار البيت أهدأ، وصار أخوه يحب اللعب معه.\n\nتعلم أن الخلق الجميل عبادة، وأن احترام الوالدين ومساعدة الإخوة يجعل البيت مليئًا بالرحمة.' }
+    ];
+    const kidsVideos = [
+      { title: 'قصص الإنسان في القرآن للأطفال', url: 'https://www.youtube.com/results?search_query=%D9%82%D8%B5%D8%B5+%D8%A7%D9%84%D8%A5%D9%86%D8%B3%D8%A7%D9%86+%D9%81%D9%8A+%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86+%D9%84%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84' },
+      { title: 'قصص الحيوان في القرآن للأطفال', url: 'https://www.youtube.com/results?search_query=%D9%82%D8%B5%D8%B5+%D8%A7%D9%84%D8%AD%D9%8A%D9%88%D8%A7%D9%86+%D9%81%D9%8A+%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86+%D9%84%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84' },
+      { title: 'تعليم السور القصيرة للأطفال', url: 'https://www.youtube.com/results?search_query=%D8%AA%D8%B9%D9%84%D9%8A%D9%85+%D8%A7%D9%84%D8%B3%D9%88%D8%B1+%D8%A7%D9%84%D9%82%D8%B5%D9%8A%D8%B1%D8%A9+%D9%84%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84' },
+      { title: 'أذكار وأدعية سهلة للأطفال', url: 'https://www.youtube.com/results?search_query=%D8%A3%D8%B0%D9%83%D8%A7%D8%B1+%D9%88%D8%A3%D8%AF%D8%B9%D9%8A%D8%A9+%D8%B3%D9%87%D9%84%D8%A9+%D9%84%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84' }
+    ];
+    const learningAyahs = [
+      { surah: 'الشرح', ayah: 'فإن مع العسر يسرًا', meaning: 'بعد الضيق يأتي الفرج بإذن الله.' },
+      { surah: 'الرعد', ayah: 'ألا بذكر الله تطمئن القلوب', meaning: 'الذكر يملأ القلب بالسكينة.' },
+      { surah: 'الزمر', ayah: 'لا تقنطوا من رحمة الله', meaning: 'لا تيأس من رحمة الله مهما كان الذنب.' },
+      { surah: 'الطلاق', ayah: 'ومن يتق الله يجعل له مخرجًا', meaning: 'التقوى سبب للفرج والرزق.' }
+    ];
+    const worldCities = [
+      { label: 'مكة المكرمة - السعودية', city: 'Makkah', country: 'Saudi Arabia', lat: 21.3891, lng: 39.8579, method: '4' },
+      { label: 'المدينة المنورة - السعودية', city: 'Madinah', country: 'Saudi Arabia', lat: 24.5247, lng: 39.5692, method: '4' },
+      { label: 'الرياض - السعودية', city: 'Riyadh', country: 'Saudi Arabia', lat: 24.7136, lng: 46.6753, method: '4' },
+      { label: 'القاهرة - مصر', city: 'Cairo', country: 'Egypt', lat: 30.0444, lng: 31.2357, method: '3' },
+      { label: 'دبي - الإمارات', city: 'Dubai', country: 'United Arab Emirates', lat: 25.2048, lng: 55.2708, method: '4' },
+      { label: 'الدوحة - قطر', city: 'Doha', country: 'Qatar', lat: 25.2854, lng: 51.5310, method: '4' },
+      { label: 'الكويت - الكويت', city: 'Kuwait City', country: 'Kuwait', lat: 29.3759, lng: 47.9774, method: '4' },
+      { label: 'عمان - الأردن', city: 'Amman', country: 'Jordan', lat: 31.9539, lng: 35.9106, method: '4' },
+      { label: 'إسطنبول - تركيا', city: 'Istanbul', country: 'Turkey', lat: 41.0082, lng: 28.9784, method: '13' },
+      { label: 'لندن - بريطانيا', city: 'London', country: 'United Kingdom', lat: 51.5072, lng: -0.1276, method: '5' },
+      { label: 'باريس - فرنسا', city: 'Paris', country: 'France', lat: 48.8566, lng: 2.3522, method: '5' },
+      { label: 'نيويورك - أمريكا', city: 'New York', country: 'United States', lat: 40.7128, lng: -74.0060, method: '2' },
+      { label: 'جاكرتا - إندونيسيا', city: 'Jakarta', country: 'Indonesia', lat: -6.2088, lng: 106.8456, method: '5' },
+      { label: 'كوالالمبور - ماليزيا', city: 'Kuala Lumpur', country: 'Malaysia', lat: 3.1390, lng: 101.6869, method: '5' }
+    ];
+    const languages = [
+      ['ar', 'العربية'], ['en', 'English'], ['fr', 'Français'], ['es', 'Español'], ['de', 'Deutsch'], ['it', 'Italiano'],
+      ['pt', 'Português'], ['ru', 'Русский'], ['tr', 'Türkçe'], ['fa', 'فارسی'], ['ur', 'اردو'], ['hi', 'हिन्दी'],
+      ['bn', 'বাংলা'], ['id', 'Bahasa Indonesia'], ['ms', 'Bahasa Melayu'], ['sw', 'Kiswahili'], ['ha', 'Hausa'],
+      ['am', 'አማርኛ'], ['so', 'Soomaali'], ['zh', '中文'], ['ja', '日本語'], ['ko', '한국어'], ['th', 'ไทย'],
+      ['vi', 'Tiếng Việt'], ['nl', 'Nederlands'], ['pl', 'Polski'], ['uk', 'Українська'], ['ro', 'Română'],
+      ['el', 'Ελληνικά'], ['he', 'עברית'], ['tl', 'Filipino'], ['af', 'Afrikaans'], ['sq', 'Shqip'],
+      ['az', 'Azərbaycanca'], ['be', 'Беларуская'], ['bg', 'Български'], ['ca', 'Català'], ['cs', 'Čeština'],
+      ['da', 'Dansk'], ['et', 'Eesti'], ['fi', 'Suomi'], ['ga', 'Gaeilge'], ['ka', 'ქართული'], ['gu', 'ગુજરાતી'],
+      ['hr', 'Hrvatski'], ['hu', 'Magyar'], ['hy', 'Հայերեն'], ['is', 'Íslenska'], ['kn', 'ಕನ್ನಡ'], ['kk', 'Қазақша'],
+      ['km', 'ខ្មែរ'], ['lo', 'ລາວ'], ['lt', 'Lietuvių'], ['lv', 'Latviešu'], ['mk', 'Македонски'], ['ml', 'മലയാളം'],
+      ['mn', 'Монгол'], ['mr', 'मराठी'], ['my', 'မြန်မာ'], ['ne', 'नेपाली'], ['no', 'Norsk'], ['pa', 'ਪੰਜਾਬੀ'],
+      ['ps', 'پښتو'], ['si', 'සිංහල'], ['sk', 'Slovenčina'], ['sl', 'Slovenščina'], ['sr', 'Српски'], ['ta', 'தமிழ்'],
+      ['te', 'తెలుగు'], ['uz', 'Oʻzbekcha'], ['yo', 'Yorùbá'], ['zu', 'Zulu']
+    ];
+    let comfortFilter = 'all';
+    let worshipTimer = null;
+    let worshipSecondsLeft = 0;
+    let currentStoryCategory = 'all';
+
+    function getStorage(key, fallback) {
+      try {
+        return JSON.parse(localStorage.getItem(key)) ?? fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function setStorage(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+
+    function copyText(text) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => showToast('تم النسخ'));
+      } else {
+        showToast('انسخ النص يدويًا من البطاقة');
+      }
+    }
+
+    const sectionGroups = {
+      quran: {
+        title: 'مجموعة القرآن الكريم',
+        description: 'القراءة والتفسير والختمة وخطة رمضان والمفضلة؛ كل ما تحتاجه للقرآن في مكان واحد.',
+        views: ['quranView', 'tafsirView', 'favoritesView', 'khatmaView', 'ramadanView']
+      },
+      worship: {
+        title: 'مجموعة العبادة اليومية',
+        description: 'الأذكار، مواقيت الصلاة، القبلة، جلسة الخشوع، الرقية، وأسماء الله الحسنى.',
+        views: ['adhkarView', 'prayerTimesView', 'qiblaView', 'khushuView', 'ruqyahView', 'namesView']
+      },
+      knowledge: {
+        title: 'مجموعة العلم والقصص',
+        description: 'الأحاديث والقصص والسيرة والمحتوى المناسب للأطفال في مجموعة واحدة.',
+        views: ['hadithView', 'storiesView', 'storyLibraryView', 'seerahView', 'seerahVideosView', 'bedtimeStoriesView', 'kidsView']
+      },
+      heart: {
+        title: 'مجموعة طمأنينة وتنظيم',
+        description: 'رسائل تطمئن القلب، سجل روحاني، وإعدادات اللغة في مكان هادئ وسهل الوصول.',
+        views: ['comfortView', 'journalView', 'languagesView']
+      }
+    };
+
+    function getGroupForView(viewId) {
+      return Object.entries(sectionGroups).find(([, group]) => group.views.includes(viewId))?.[0];
+    }
+
+    function selectSectionGroup(groupId, keepViewOpen = false) {
+      const group = sectionGroups[groupId];
+      if (!group) return;
+      document.querySelectorAll('.choice').forEach(choice => {
+        choice.hidden = !group.views.includes(choice.dataset.open);
+        if (!keepViewOpen) choice.classList.remove('active');
+      });
+      document.querySelectorAll('.group-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.showGroup === groupId);
+      });
+      document.getElementById('groupTitle').textContent = group.title;
+      document.getElementById('groupDescription').textContent = group.description;
+    }
+
+    function setActiveView(viewId) {
+      const groupId = getGroupForView(viewId);
+      if (groupId) selectSectionGroup(groupId, true);
+      document.querySelectorAll('.choice').forEach(item => {
+        item.classList.toggle('active', item.dataset.open === viewId);
+      });
+      document.querySelectorAll('.view').forEach(view => {
+        view.classList.toggle('active', view.id === viewId);
+      });
+      const activeView = document.getElementById(viewId);
+      if (activeView) {
+        activeView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function goHome() {
+      document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+      selectSectionGroup('quran');
+      document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      showToast('تم الرجوع للصفحة الرئيسية');
+    }
+
+    document.getElementById('homeBtn').addEventListener('click', goHome);
+
+    document.querySelectorAll('.group-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        selectSectionGroup(tab.dataset.showGroup);
+        document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+        document.querySelector('.home-actions').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    document.querySelectorAll('.choice').forEach(button => {
+      button.addEventListener('click', () => {
+        setActiveView(button.dataset.open);
+        if (button.dataset.dhikrGo) {
+          currentDhikrFilter = button.dataset.dhikrGo;
+          document.querySelectorAll('.dhikr-filter').forEach(item => {
+            item.classList.toggle('active', item.dataset.dhikrFilter === currentDhikrFilter);
+          });
+          renderAdhkar();
+        }
+        if (button.dataset.scrollRadio) {
+          document.querySelector('.radio-card')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        if (button.dataset.open === 'favoritesView') renderFavorites();
+        if (button.dataset.open === 'tafsirView') renderTafsirSelectors();
+        if (button.dataset.open === 'prayerTimesView') renderPrayerTimes();
+        if (button.dataset.open === 'qiblaView') calculateQibla();
+        if (button.dataset.open === 'languagesView') renderLanguages();
+        if (button.dataset.open === 'khatmaView') renderKhatma();
+        if (button.dataset.open === 'ramadanView') renderRamadanPlan();
+        if (button.dataset.open === 'namesView') renderNames();
+        if (button.dataset.open === 'storiesView') renderStories();
+        if (button.dataset.open === 'storyLibraryView') renderStoryLibrary();
+        if (button.dataset.open === 'seerahView') renderSeerah();
+        if (button.dataset.open === 'seerahVideosView') renderSeerahVideos();
+        if (button.dataset.open === 'bedtimeStoriesView') renderBedtimeStories();
+        if (button.dataset.open === 'comfortView') renderComfort();
+        if (button.dataset.open === 'ruqyahView') renderRuqyah();
+        if (button.dataset.open === 'kidsView') renderKids();
+        if (button.dataset.open === 'journalView') renderJournal();
+      });
+    });
+
+    function applyPreferences() {
+      const prefs = getStorage('journeyPrefs', { dark: false, font: 'normal', theme: 'green' });
+      document.body.classList.toggle('dark', prefs.dark);
+      document.body.classList.toggle('font-small', prefs.font === 'small');
+      document.body.classList.toggle('font-large', prefs.font === 'large');
+      document.body.classList.toggle('font-xlarge', prefs.font === 'xlarge');
+      document.body.classList.toggle('theme-cream', prefs.theme === 'cream');
+      document.body.classList.toggle('theme-white', prefs.theme === 'white');
+      document.getElementById('fontSizeSelect').value = prefs.font;
+      document.getElementById('pageThemeSelect').value = prefs.theme;
+      document.getElementById('themeToggleBtn').textContent = prefs.dark ? 'الوضع النهاري' : 'الوضع الليلي';
+    }
+
+    document.getElementById('themeToggleBtn').addEventListener('click', () => {
+      const prefs = getStorage('journeyPrefs', { dark: false, font: 'normal', theme: 'green' });
+      prefs.dark = !prefs.dark;
+      setStorage('journeyPrefs', prefs);
+      applyPreferences();
+    });
+
+    document.getElementById('fontSizeSelect').addEventListener('change', event => {
+      const prefs = getStorage('journeyPrefs', { dark: false, font: 'normal', theme: 'green' });
+      prefs.font = event.target.value;
+      setStorage('journeyPrefs', prefs);
+      applyPreferences();
+    });
+
+    document.getElementById('pageThemeSelect').addEventListener('change', event => {
+      const prefs = getStorage('journeyPrefs', { dark: false, font: 'normal', theme: 'green' });
+      prefs.theme = event.target.value;
+      setStorage('journeyPrefs', prefs);
+      applyPreferences();
+    });
+
+    document.getElementById('playRadioBtn').addEventListener('click', () => {
+      const radioPlayer = document.getElementById('quranRadioPlayer');
+      radioPlayer.src = document.getElementById('quranRadioSelect').value;
+      document.getElementById('quranRadioStatus').textContent = 'جاري تشغيل راديو القرآن الكريم...';
+      radioPlayer.play().then(() => {
+        document.getElementById('quranRadioStatus').textContent = 'الراديو يعمل الآن: قرآن كريم فقط.';
+      }).catch(() => {
+        document.getElementById('quranRadioStatus').textContent = 'اضغط زر التشغيل داخل مشغل الراديو إذا منع المتصفح التشغيل.';
+      });
+    });
+
+    document.getElementById('stopRadioBtn').addEventListener('click', () => {
+      const radioPlayer = document.getElementById('quranRadioPlayer');
+      radioPlayer.pause();
+      radioPlayer.removeAttribute('src');
+      radioPlayer.load();
+      document.getElementById('quranRadioStatus').textContent = 'تم إيقاف الراديو.';
+    });
+
+    document.getElementById('quranRadioPlayer').addEventListener('error', () => {
+      document.getElementById('quranRadioStatus').textContent = 'تعذر تشغيل محطة الراديو الآن. جرّب محطة أخرى أو تأكد من الإنترنت.';
+    });
+
+    function padNumber(number) {
+      return String(number).padStart(3, '0');
+    }
+
+    function buildSurahList() {
+      surahList.innerHTML = surahs.map((name, index) => `
+        <button class="list-item ${index === 0 ? 'active' : ''}" data-surah="${index + 1}">
+          ${index + 1}. سورة ${name}
+        </button>
+      `).join('');
+
+      surahList.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => loadSurah(Number(button.dataset.surah)));
+      });
+    }
+
+    function normalizeArabic(text) {
+      return text
+        .trim()
+        .replace(/[أإآ]/g, 'ا')
+        .replace(/ة/g, 'ه')
+        .replace(/ى/g, 'ي')
+        .replace(/\s+/g, '');
+    }
+
+    function jumpToSurah() {
+      const value = document.getElementById('surahJumpInput').value.trim();
+      if (!value) {
+        showToast('اكتب اسم السورة أو رقمها');
+        return;
+      }
+
+      const number = Number(value);
+      if (number >= 1 && number <= 114) {
+        loadSurah(number);
+        return;
+      }
+
+      const normalized = normalizeArabic(value.replace(/^سورة/, ''));
+      const index = surahs.findIndex(name => normalizeArabic(name).includes(normalized));
+      if (index === -1) {
+        showToast('لم أجد هذه السورة');
+        return;
+      }
+      loadSurah(index + 1);
+    }
+
+    document.getElementById('surahJumpBtn').addEventListener('click', jumpToSurah);
+    document.getElementById('surahJumpInput').addEventListener('keydown', event => {
+      if (event.key === 'Enter') jumpToSurah();
+    });
+
+    async function fetchSurah(number) {
+      if (quranCache.has(number)) return quranCache.get(number);
+      const response = await fetch(`https://api.alquran.cloud/v1/surah/${number}/quran-uthmani`);
+      if (!response.ok) throw new Error('تعذر تحميل السورة');
+      const data = await response.json();
+      const ayahs = data.data.ayahs.map(ayah => ({
+        number: ayah.numberInSurah,
+        text: ayah.text
+      }));
+      quranCache.set(number, ayahs);
+      return ayahs;
+    }
+
+    async function loadSurah(number) {
+      currentSurah = Math.min(114, Math.max(1, number));
+      selectedAyahs.clear();
+      rangeStartAyah = null;
+      document.getElementById('rangeStartInput').value = '';
+      document.getElementById('rangeEndInput').value = '';
+      surahTitle.textContent = `سورة ${surahs[currentSurah - 1]}`;
+      quranPage.textContent = 'جاري تحميل السورة...';
+      document.querySelectorAll('.surah-list .list-item').forEach(item => {
+        item.classList.toggle('active', Number(item.dataset.surah) === currentSurah);
+      });
+
+      try {
+        const ayahs = await fetchSurah(currentSurah);
+        currentAyahs = ayahs;
+        setStorage('lastPlace', { surah: currentSurah, ayah: 1 });
+        const favorites = getStorage('favorites', []);
+        quranPage.innerHTML = ayahs.map(ayah => `
+          <span class="ayah ${favorites.some(item => item.type === 'ayah' && item.surah === currentSurah && item.ayah === ayah.number) ? 'favorite' : ''}" data-ayah="${ayah.number}">
+            ${ayah.text}
+            <span class="ayah-number">﴿${ayah.number}﴾</span>
+          </span>
+        `).join(' ');
+      } catch {
+        quranPage.innerHTML = 'تعذر تحميل نص القرآن الآن. تأكد من اتصال الإنترنت ثم أعد فتح الصفحة.';
+      }
+    }
+
+    quranPage.addEventListener('click', event => {
+      const ayah = event.target.closest('.ayah');
+      if (!ayah) return;
+      const number = Number(ayah.dataset.ayah);
+
+      if (event.shiftKey && rangeStartAyah !== null) {
+        selectAyahRange(rangeStartAyah, number);
+        return;
+      }
+
+      selectSingleAyah(number);
+      showAyahActions(number, event.clientX, event.clientY);
+      setStorage('lastPlace', { surah: currentSurah, ayah: number });
+    });
+
+    function selectSingleAyah(number) {
+      selectedAyahs.clear();
+      document.querySelectorAll('.ayah.selected').forEach(ayah => ayah.classList.remove('selected'));
+      selectedAyahs.add(String(number));
+      rangeStartAyah = Number(number);
+      document.getElementById('ayahInput').value = number;
+      quranPage.querySelector(`.ayah[data-ayah="${number}"]`)?.classList.add('selected');
+    }
+
+    function hideAyahActions() {
+      ayahActionMenu.classList.remove('open');
+      ayahActionMenu.innerHTML = '';
+    }
+
+    function showAyahActions(number, x, y) {
+      const ayah = currentAyahs.find(item => item.number === Number(number));
+      if (!ayah) return;
+      ayahActionMenu.innerHTML = `
+        <strong>سورة ${surahs[currentSurah - 1]} - آية ${number}</strong>
+        <button data-ayah-action="listen" data-ayah-number="${number}">تسميع الآية بصوت الشيخ</button>
+        <button class="secondary" data-ayah-action="read" data-ayah-number="${number}">قراءة الآية فقط</button>
+        <button class="secondary" data-ayah-action="tafsir" data-ayah-number="${number}">عرض تفسير الآية</button>
+        <button class="secondary" data-ayah-action="copy" data-ayah-number="${number}">نسخ الآية</button>
+        <button class="secondary" data-ayah-action="favorite" data-ayah-number="${number}">حفظ في المفضلة</button>
+      `;
+      const left = Math.min(Math.max(12, x - 160), window.innerWidth - 332);
+      const top = Math.min(Math.max(12, y + 12), window.innerHeight - 270);
+      ayahActionMenu.style.left = `${left}px`;
+      ayahActionMenu.style.top = `${top}px`;
+      ayahActionMenu.classList.add('open');
+    }
+
+    document.addEventListener('click', event => {
+      if (!event.target.closest('.ayah') && !event.target.closest('#ayahActionMenu')) {
+        hideAyahActions();
+      }
+    });
+
+    ayahActionMenu.addEventListener('click', event => {
+      const button = event.target.closest('[data-ayah-action]');
+      if (!button) return;
+      const number = Number(button.dataset.ayahNumber);
+      const ayah = currentAyahs.find(item => item.number === number);
+      if (!ayah) return;
+      selectSingleAyah(number);
+      if (button.dataset.ayahAction === 'listen') {
+        startPlayback('selected');
+      }
+      if (button.dataset.ayahAction === 'read') {
+        markPlayingAyah(number);
+        audioStatus.textContent = `اقرأ الآية ${number}: ${ayah.text}`;
+      }
+      if (button.dataset.ayahAction === 'tafsir') {
+        setActiveView('tafsirView');
+        renderTafsirSelectors();
+        document.getElementById('tafsirSurahSelect').value = String(currentSurah);
+        document.getElementById('tafsirAyahInput').value = String(number);
+        loadTafsir();
+      }
+      if (button.dataset.ayahAction === 'copy') {
+        copyText(`${ayah.text} ﴿${number}﴾\nسورة ${surahs[currentSurah - 1]}`);
+      }
+      if (button.dataset.ayahAction === 'favorite') {
+        const favorites = getStorage('favorites', []);
+        if (!favorites.some(item => item.type === 'ayah' && item.surah === currentSurah && item.ayah === number)) {
+          favorites.push({ type: 'ayah', surah: currentSurah, ayah: number, title: `سورة ${surahs[currentSurah - 1]} - آية ${number}`, text: ayah.text });
+          setStorage('favorites', favorites);
+        }
+        showToast('تم حفظ الآية في المفضلة');
+      }
+      hideAyahActions();
+    });
+
+    function selectAyahRange(start, end) {
+      const first = Math.max(1, Math.min(Number(start), Number(end)));
+      const last = Math.min(currentAyahs.length, Math.max(Number(start), Number(end)));
+      if (!Number.isInteger(first) || !Number.isInteger(last) || first > last) {
+        audioStatus.textContent = 'اكتب رقم بداية ونهاية صحيحين للآيات.';
+        return;
+      }
+
+      selectedAyahs.clear();
+      document.querySelectorAll('.ayah.selected').forEach(ayah => ayah.classList.remove('selected'));
+      for (let number = first; number <= last; number++) {
+        selectedAyahs.add(String(number));
+        quranPage.querySelector(`.ayah[data-ayah="${number}"]`)?.classList.add('selected');
+      }
+      rangeStartAyah = first;
+      document.getElementById('rangeStartInput').value = first;
+      document.getElementById('rangeEndInput').value = last;
+      audioStatus.textContent = `تم تحديد الآيات من ${first} إلى ${last}.`;
+      quranPage.querySelector(`.ayah[data-ayah="${last}"]`)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+
+    document.getElementById('selectRangeBtn').addEventListener('click', () => {
+      selectAyahRange(
+        document.getElementById('rangeStartInput').value,
+        document.getElementById('rangeEndInput').value
+      );
+    });
+
+    function getSelectedAyahNumbers() {
+      const selected = [...selectedAyahs].sort((a, b) => Number(a) - Number(b)).map(Number);
+      const specificAyah = document.getElementById('ayahInput').value.trim();
+      return specificAyah ? [Number(specificAyah)] : selected;
+    }
+
+    function getSelectedAyahText() {
+      const numbers = getSelectedAyahNumbers();
+      return numbers.map(number => {
+        const ayah = currentAyahs.find(item => item.number === number);
+        return ayah ? `${ayah.text} ﴿${number}﴾` : '';
+      }).filter(Boolean).join('\n');
+    }
+
+    function markPlayingAyah(ayahNumber) {
+      document.querySelectorAll('.ayah.playing').forEach(ayah => ayah.classList.remove('playing'));
+      const current = quranPage.querySelector(`.ayah[data-ayah="${ayahNumber}"]`);
+      if (current) {
+        current.classList.add('playing');
+        current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    function updateProgress(kind, amount = 1) {
+      const today = new Date().toISOString().slice(0, 10);
+      const stats = getStorage('journeyStats', {});
+      stats[today] = stats[today] || { ayahs: 0, surahs: 0, hadiths: 0 };
+      stats[today][kind] += amount;
+      setStorage('journeyStats', stats);
+      renderProgress();
+      renderLevel();
+    }
+
+    function renderProgress() {
+      const today = new Date().toISOString().slice(0, 10);
+      const stats = getStorage('journeyStats', {});
+      const todayStats = stats[today] || { ayahs: 0, surahs: 0, hadiths: 0 };
+      document.getElementById('progressStats').textContent =
+        `قرأت/استمعت اليوم إلى ${todayStats.ayahs} آية، وأنهيت ${todayStats.surahs} سورة، وفتحت ${todayStats.hadiths} حديث.`;
+    }
+
+    document.getElementById('clearSelectionBtn').addEventListener('click', () => {
+      selectedAyahs.clear();
+      rangeStartAyah = null;
+      document.querySelectorAll('.ayah.selected').forEach(ayah => ayah.classList.remove('selected'));
+      document.getElementById('ayahInput').value = '';
+      document.getElementById('rangeStartInput').value = '';
+      document.getElementById('rangeEndInput').value = '';
+      hideAyahActions();
+    });
+
+    document.getElementById('favoriteAyahsBtn').addEventListener('click', () => {
+      const numbers = getSelectedAyahNumbers();
+      if (!numbers.length) {
+        showToast('حدد آية أولًا');
+        return;
+      }
+      const favorites = getStorage('favorites', []);
+      numbers.forEach(number => {
+        const ayah = currentAyahs.find(item => item.number === number);
+        if (ayah && !favorites.some(item => item.type === 'ayah' && item.surah === currentSurah && item.ayah === number)) {
+          favorites.push({ type: 'ayah', surah: currentSurah, ayah: number, title: `سورة ${surahs[currentSurah - 1]} - آية ${number}`, text: ayah.text });
+        }
+      });
+      setStorage('favorites', favorites);
+      loadSurah(currentSurah);
+      showToast('تم حفظ الآيات في المفضلة');
+    });
+
+    document.getElementById('shareAyahsBtn').addEventListener('click', () => {
+      const text = getSelectedAyahText();
+      if (!text) {
+        showToast('حدد آية أولًا');
+        return;
+      }
+      copyText(`${text}\nسورة ${surahs[currentSurah - 1]}`);
+    });
+
+    document.getElementById('searchQuranBtn').addEventListener('click', () => {
+      const query = document.getElementById('quranSearchInput').value.trim();
+      const resultsBox = document.getElementById('quranSearchResults');
+      if (!query) {
+        resultsBox.innerHTML = '';
+        return;
+      }
+      const results = currentAyahs.filter(ayah => ayah.text.includes(query));
+      resultsBox.innerHTML = results.map(ayah => `
+        <article class="mini-card">
+          <strong>سورة ${surahs[currentSurah - 1]} - آية ${ayah.number}</strong>
+          <div>${ayah.text}</div>
+          <div class="card-actions">
+            <button class="secondary" data-go-ayah="${ayah.number}">اذهب للآية</button>
+            <button class="secondary" data-copy-text="${ayah.text} ﴿${ayah.number}﴾">نسخ</button>
+          </div>
+        </article>
+      `).join('') || '<article class="mini-card">لا توجد نتائج في هذه السورة.</article>';
+    });
+
+    document.getElementById('quranSearchResults').addEventListener('click', event => {
+      const goButton = event.target.closest('[data-go-ayah]');
+      const copyButton = event.target.closest('[data-copy-text]');
+      if (goButton) markPlayingAyah(goButton.dataset.goAyah);
+      if (copyButton) copyText(copyButton.dataset.copyText);
+    });
+
+    document.getElementById('prevSurahBtn').addEventListener('click', () => loadSurah(currentSurah - 1));
+    document.getElementById('nextSurahBtn').addEventListener('click', () => loadSurah(currentSurah + 1));
+
+    function playQueue() {
+      if (!playbackQueue.length) return;
+      sourceAttempt = 0;
+      const item = playbackQueue[playbackIndex];
+      audioPlayer.src = item.urls[sourceAttempt];
+      markPlayingAyah(item.ayah);
+      setStorage('lastPlace', { surah: currentSurah, ayah: item.ayah });
+      audioStatus.textContent = `يتم تشغيل الآية رقم ${playbackIndex + 1} من ${playbackQueue.length}...`;
+      audioPlayer.play().catch(() => {
+        audioStatus.textContent = 'المتصفح منع التشغيل التلقائي. اضغط زر التشغيل داخل مشغل الصوت.';
+      });
+    }
+
+    async function startPlayback(mode) {
+      const reciter = document.getElementById('reciterSelect').value;
+      const folders = reciterFolders[reciter];
+      if (!folders.length) {
+        audioStatus.textContent = 'هذا القارئ غير متاح في مصدر الصوت الحالي. اختر قارئًا آخر أو أضف رابط الصوت الخاص به.';
+        return;
+      }
+
+      const ayahs = await fetchSurah(currentSurah);
+      const specificAyah = document.getElementById('ayahInput').value.trim();
+      const selected = [...selectedAyahs].sort((a, b) => Number(a) - Number(b));
+      let baseAyahs;
+
+      if (mode === 'full') {
+        baseAyahs = ayahs.map(ayah => ayah.number);
+      } else {
+        baseAyahs = specificAyah
+          ? [Number(specificAyah)]
+          : selected.length
+            ? selected.map(Number)
+            : [];
+      }
+
+      if (!baseAyahs.length) {
+        audioStatus.textContent = 'اختر آية أو اكتب رقم آية، أو اضغط زر تشغيل السورة كاملة.';
+        return;
+      }
+
+      const maxAyah = ayahs.length;
+      if (baseAyahs.some(ayahNumber => ayahNumber < 1 || ayahNumber > maxAyah)) {
+        audioStatus.textContent = `رقم الآية غير صحيح. هذه السورة عدد آياتها ${maxAyah}.`;
+        return;
+      }
+      const repeatCount = Math.max(1, Number(document.getElementById('repeatInput').value) || 1);
+      const repeatedAyahs = Array.from({ length: repeatCount }, () => baseAyahs).flat();
+
+      playbackQueue = repeatedAyahs.map(ayahNumber => ({
+        ayah: ayahNumber,
+        urls: folders.map(folder => `https://everyayah.com/data/${folder}/${padNumber(currentSurah)}${padNumber(ayahNumber)}.mp3`)
+      }));
+      playbackIndex = 0;
+      document.getElementById('completionDua').style.display = 'none';
+      playQueue();
+    }
+
+    document.getElementById('playBtn').addEventListener('click', () => startPlayback('selected'));
+    document.getElementById('playFullSurahBtn').addEventListener('click', () => startPlayback('full'));
+    document.getElementById('pauseBtn').addEventListener('click', () => {
+      if (audioPlayer.paused) {
+        audioPlayer.play().catch(() => {
+          audioStatus.textContent = 'اضغط زر التشغيل داخل مشغل الصوت لإكمال التلاوة.';
+        });
+        audioStatus.textContent = 'تم استكمال التلاوة من نفس الموضع.';
+      } else {
+        audioPlayer.pause();
+        audioStatus.textContent = 'تم إيقاف التلاوة مؤقتًا. اضغط إيقاف مؤقت مرة أخرى للاستكمال.';
+      }
+    });
+    document.getElementById('stopBtn').addEventListener('click', () => {
+      audioPlayer.pause();
+      audioPlayer.currentTime = 0;
+      playbackQueue = [];
+      playbackIndex = 0;
+      sourceAttempt = 0;
+      document.querySelectorAll('.ayah.playing').forEach(ayah => ayah.classList.remove('playing'));
+      audioStatus.textContent = 'تم إيقاف القراءة.';
+    });
+
+    document.getElementById('expandReaderBtn').addEventListener('click', () => {
+      const quranView = document.getElementById('quranView');
+      const expanded = quranView.classList.toggle('reading-expanded');
+      document.getElementById('expandReaderBtn').textContent = expanded ? 'إغلاق تكبير القراءة' : 'تكبير شاشة القراءة';
+      quranPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    audioPlayer.addEventListener('ended', () => {
+      updateProgress('ayahs');
+      playbackIndex += 1;
+      if (playbackIndex < playbackQueue.length) {
+        playQueue();
+      } else {
+        updateProgress('surahs');
+        document.getElementById('completionDua').style.display = 'block';
+        audioStatus.textContent = 'انتهت التلاوة المحددة.';
+      }
+    });
+
+    audioPlayer.addEventListener('error', () => {
+      const urls = playbackQueue[playbackIndex]?.urls || [];
+      if (sourceAttempt < urls.length - 1) {
+        sourceAttempt += 1;
+        audioPlayer.src = urls[sourceAttempt];
+        audioStatus.textContent = 'الرابط الأول لم يعمل، جاري تجربة مصدر صوت بديل...';
+        audioPlayer.play().catch(() => {
+          audioStatus.textContent = 'اضغط زر التشغيل داخل مشغل الصوت لإكمال التلاوة.';
+        });
+      } else if (urls.length) {
+        audioStatus.textContent = 'تعذر تشغيل هذا الشيخ من المصدر الحالي. جرّب شيخًا آخر أو تأكد من اتصال الإنترنت.';
+      }
+    });
+
+    function renderHadiths() {
+      const search = document.getElementById('hadithSearch').value.trim();
+      const filter = document.getElementById('hadithFilter').value;
+      const results = hadiths.filter(hadith => {
+        const matchesSearch = !search || hadith.text.includes(search) || hadith.source.includes(search);
+        const matchesFilter = filter === 'all' || hadith.category === filter;
+        return matchesSearch && matchesFilter;
+      });
+
+      document.getElementById('hadithCount').textContent = `${results.length} حديث`;
+      document.getElementById('hadithResults').innerHTML = results.map(hadith => `
+        <article class="hadith-card">
+          <strong>${hadith.source}</strong>
+          <div>${hadith.text}</div>
+          <div class="card-actions">
+            <button class="secondary" data-copy-hadith="${hadith.text} - ${hadith.source}">نسخ</button>
+            <button class="secondary" data-fav-hadith="${hadith.text}" data-source="${hadith.source}">حفظ</button>
+          </div>
+        </article>
+      `).join('') || '<div class="hadith-card">لا توجد نتائج مطابقة.</div>';
+    }
+
+    document.getElementById('hadithResults').addEventListener('click', event => {
+      const copyButton = event.target.closest('[data-copy-hadith]');
+      const favButton = event.target.closest('[data-fav-hadith]');
+      if (copyButton) copyText(copyButton.dataset.copyHadith);
+      if (favButton) {
+        const favorites = getStorage('favorites', []);
+        const text = favButton.dataset.favHadith;
+        if (!favorites.some(item => item.type === 'hadith' && item.text === text)) {
+          favorites.push({ type: 'hadith', title: favButton.dataset.source, text });
+          setStorage('favorites', favorites);
+        }
+        showToast('تم حفظ الحديث في المفضلة');
+      }
+    });
+
+    function renderAdhkar() {
+      const filtered = adhkar.filter(item => {
+        if (currentDhikrFilter === 'all') return true;
+        if (currentDhikrFilter === 'adhkar') return item.type === 'dhikr';
+        if (currentDhikrFilter === 'duaa') return item.type === 'duaa';
+        return item.category === currentDhikrFilter;
+      });
+      document.getElementById('tasbihCounter').style.display =
+        currentDhikrFilter === 'tasbih' || currentDhikrFilter === 'istighfar' ? 'block' : 'none';
+      document.getElementById('adhkarList').innerHTML = filtered.map(item => `
+        <article class="mini-card">
+          <strong>${item.title}</strong>
+          <div>${item.text}</div>
+          <div class="card-actions">
+            <button class="secondary" data-copy-dhikr="${item.text}">نسخ</button>
+            <button class="secondary" data-fav-dhikr="${item.text}" data-title="${item.title}">حفظ</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.querySelectorAll('.dhikr-filter').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.dhikr-filter').forEach(item => item.classList.remove('active'));
+        button.classList.add('active');
+        currentDhikrFilter = button.dataset.dhikrFilter;
+        renderAdhkar();
+      });
+    });
+
+    function renderTasbihCount() {
+      document.getElementById('tasbihCount').textContent = tasbihCount;
+      const target = Math.max(1, Number(document.getElementById('tasbihTarget').value) || 100);
+      const percent = Math.min(100, Math.round((tasbihCount / target) * 100));
+      document.getElementById('tasbihProgress').innerHTML =
+        `الهدف: ${target} - التقدم: ${percent}%`;
+    }
+
+    document.getElementById('incrementTasbihBtn').addEventListener('click', () => {
+      tasbihCount += 1;
+      setStorage('tasbihCount', tasbihCount);
+      renderTasbihCount();
+    });
+
+    document.getElementById('resetTasbihBtn').addEventListener('click', () => {
+      tasbihCount = 0;
+      setStorage('tasbihCount', tasbihCount);
+      renderTasbihCount();
+    });
+
+    document.getElementById('saveTasbihBtn').addEventListener('click', () => {
+      const phrase = document.getElementById('tasbihPhrase').value;
+      const favorites = getStorage('favorites', []);
+      favorites.push({ type: 'dhikr', title: 'ورد تسبيح محفوظ', text: `${phrase} - العدد: ${tasbihCount}` });
+      setStorage('favorites', favorites);
+      showToast('تم حفظ ورد التسبيح في المفضلة');
+    });
+
+    document.getElementById('tasbihTarget').addEventListener('input', renderTasbihCount);
+
+    document.getElementById('adhkarList').addEventListener('click', event => {
+      const copyButton = event.target.closest('[data-copy-dhikr]');
+      const favButton = event.target.closest('[data-fav-dhikr]');
+      if (copyButton) copyText(copyButton.dataset.copyDhikr);
+      if (favButton) {
+        const favorites = getStorage('favorites', []);
+        const text = favButton.dataset.favDhikr;
+        if (!favorites.some(item => item.type === 'dhikr' && item.text === text)) {
+          favorites.push({ type: 'dhikr', title: favButton.dataset.title, text });
+          setStorage('favorites', favorites);
+        }
+        showToast('تم حفظ الذكر في المفضلة');
+      }
+    });
+
+    function renderFavorites() {
+      const favorites = getStorage('favorites', []);
+      document.getElementById('favoritesList').innerHTML = favorites.map((item, index) => `
+        <article class="mini-card">
+          <strong>${item.title}</strong>
+          <div>${item.text}</div>
+          <div class="card-actions">
+            <button class="secondary" data-copy-favorite="${item.text}">نسخ</button>
+            <button class="secondary" data-delete-favorite="${index}">حذف</button>
+          </div>
+        </article>
+      `).join('') || '<article class="mini-card">لم تضف أي عناصر للمفضلة بعد.</article>';
+    }
+
+    document.getElementById('favoritesList').addEventListener('click', event => {
+      const copyButton = event.target.closest('[data-copy-favorite]');
+      const deleteButton = event.target.closest('[data-delete-favorite]');
+      if (copyButton) copyText(copyButton.dataset.copyFavorite);
+      if (deleteButton) {
+        const favorites = getStorage('favorites', []);
+        favorites.splice(Number(deleteButton.dataset.deleteFavorite), 1);
+        setStorage('favorites', favorites);
+        renderFavorites();
+      }
+    });
+
+    document.getElementById('clearFavoritesBtn').addEventListener('click', () => {
+      setStorage('favorites', []);
+      renderFavorites();
+      showToast('تم مسح المفضلة');
+    });
+
+    function renderDailyCards() {
+      const daySeed = Math.floor(Date.now() / 86400000);
+      dailySurahNumber = (daySeed % 114) + 1;
+      const dailyHadith = hadiths[daySeed % hadiths.length];
+      const dailyDhikr = adhkar[daySeed % adhkar.length];
+      const dailyDua = adhkar.filter(item => item.type === 'duaa')[daySeed % adhkar.filter(item => item.type === 'duaa').length];
+      const dailyChallenge = challenges[daySeed % challenges.length];
+      document.getElementById('dailyWird').innerHTML =
+        `سورة ${surahs[dailySurahNumber - 1]} مع ذكر: ${dailyDhikr.text}`;
+      document.getElementById('dailyHadith').innerHTML =
+        `<strong>${dailyHadith.source}</strong><br>${dailyHadith.text}`;
+      document.getElementById('dailyDua').textContent = dailyDua.text;
+      document.getElementById('dailyChallenge').textContent = dailyChallenge;
+    }
+
+    document.getElementById('dailySurahBtn').addEventListener('click', () => {
+      setActiveView('quranView');
+      loadSurah(dailySurahNumber);
+    });
+
+    document.getElementById('lastPlaceBtn').addEventListener('click', async () => {
+      const lastPlace = getStorage('lastPlace', null);
+      if (!lastPlace) {
+        showToast('لا يوجد آخر مكان محفوظ بعد');
+        return;
+      }
+      setActiveView('quranView');
+      await loadSurah(lastPlace.surah);
+      markPlayingAyah(lastPlace.ayah);
+      setStorage('lastPlace', lastPlace);
+    });
+
+    function renderKhatma() {
+      const pages = getStorage('khatmaPages', 0);
+      const percent = Math.min(100, Math.round((pages / 604) * 100));
+      document.getElementById('khatmaProgress').innerHTML = `
+        <strong>قرأت ${pages} من 604 صفحة</strong><br>
+        نسبة التقدم: ${percent}%<br>
+        المتبقي: ${Math.max(0, 604 - pages)} صفحة
+        <div style="height:12px;background:var(--border);border-radius:99px;overflow:hidden;margin-top:10px;">
+          <div style="height:100%;width:${percent}%;background:var(--primary);"></div>
+        </div>
+      `;
+    }
+
+    document.getElementById('addKhatmaPagesBtn').addEventListener('click', () => {
+      const add = Math.max(1, Number(document.getElementById('khatmaPagesInput').value) || 1);
+      const pages = Math.min(604, getStorage('khatmaPages', 0) + add);
+      setStorage('khatmaPages', pages);
+      renderKhatma();
+      showToast('تم تحديث الختمة');
+    });
+
+    document.getElementById('resetKhatmaBtn').addEventListener('click', () => {
+      setStorage('khatmaPages', 0);
+      renderKhatma();
+      showToast('تم بدء ختمة جديدة');
+    });
+
+    function renderRamadanPlan() {
+      const days = Number(document.getElementById('ramadanPlanSelect').value);
+      const pagesPerDay = Math.ceil(604 / days);
+      const partsPerDay = days === 30 ? 1 : days === 15 ? 2 : 3;
+      document.getElementById('ramadanPlan').innerHTML = `
+        <strong>وردك اليومي:</strong><br>
+        حوالي ${pagesPerDay} صفحة يوميًا.<br>
+        تقريبًا ${partsPerDay} جزء في اليوم.<br>
+        نصيحة: قسم الورد بعد الصلوات حتى يكون أسهل.
+      `;
+    }
+
+    document.getElementById('ramadanPlanSelect').addEventListener('change', renderRamadanPlan);
+
+    function renderNames() {
+      document.getElementById('namesList').innerHTML = allahNames.map(name => `
+        <article class="mini-card">
+          <strong style="font-size:1.35rem;">${name}</strong>
+          <div class="card-actions">
+            <button class="secondary" data-copy-name="${name}">نسخ</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.getElementById('namesList').addEventListener('click', event => {
+      const button = event.target.closest('[data-copy-name]');
+      if (button) copyText(button.dataset.copyName);
+    });
+
+    function renderStoryLibrary() {
+      const allTab = { id: 'all', title: 'كل القصص' };
+      const tabs = [allTab, ...storyCategories];
+      const category = currentStoryCategory === 'all'
+        ? allTab
+        : storyCategories.find(item => item.id === currentStoryCategory) || allTab;
+      currentStoryCategory = category.id;
+      document.getElementById('storyCategoryTabs').innerHTML = tabs.map(item => `
+        <button class="secondary ${item.id === category.id ? 'active' : ''}" data-story-category="${item.id}">${item.title}</button>
+      `).join('');
+
+      const selectedStories = category.id === 'all'
+        ? storyCategories.flatMap(item => item.stories.map(story => ({ ...story, group: item.title })))
+        : category.stories.map(story => ({ ...story, group: category.title }));
+      const selectedVideos = category.id === 'all' ? [] : category.videos;
+
+      const videosHtml = selectedVideos.map(video => `
+        <article class="mini-card">
+          <strong>${video.title}</strong>
+          <div>فيديوهات مقترحة لهذا التصنيف. اختر القناة الرسمية أو المصدر الأوضح قبل المشاهدة.</div>
+          <div class="card-actions">
+            <button data-open-story-video="${video.url}">فتح الفيديوهات</button>
+            <button class="secondary" data-copy-story-video="${video.title}: ${video.url}">نسخ الرابط</button>
+          </div>
+        </article>
+      `).join('');
+
+      const storiesHtml = selectedStories.map(story => {
+        const fullText = story.ending ? `${story.text}\n\n${story.ending}` : story.text;
+        return `
+          <article class="mini-card story-card">
+            <strong>${story.title}</strong>
+            <div class="note" style="margin:0 0 12px;">${story.group}</div>
+            <div class="story-text">${fullText}</div>
+            <div class="card-actions">
+              <button class="secondary" data-copy-library-story="${story.title}: ${fullText}">نسخ القصة</button>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      document.getElementById('storyLibraryList').innerHTML = `
+        <article class="mini-card">
+          <strong>${category.title}</strong>
+          <div>${category.id === 'all' ? 'هنا كل القصص مكتوبة ومجمعة من كل الأقسام.' : 'هذا القسم يحتوي على قصص مكتوبة كبيرة وروابط فيديوهات نافعة.'}</div>
+        </article>
+        ${videosHtml}
+        ${storiesHtml}
+      `;
+    }
+
+    document.getElementById('storyCategoryTabs').addEventListener('click', event => {
+      const button = event.target.closest('[data-story-category]');
+      if (!button) return;
+      currentStoryCategory = button.dataset.storyCategory;
+      renderStoryLibrary();
+    });
+
+    document.getElementById('storyLibraryList').addEventListener('click', event => {
+      const videoButton = event.target.closest('[data-open-story-video]');
+      const copyVideoButton = event.target.closest('[data-copy-story-video]');
+      const copyStoryButton = event.target.closest('[data-copy-library-story]');
+      if (videoButton) window.open(videoButton.dataset.openStoryVideo, '_blank');
+      if (copyVideoButton) copyText(copyVideoButton.dataset.copyStoryVideo);
+      if (copyStoryButton) copyText(copyStoryButton.dataset.copyLibraryStory);
+    });
+
+    function renderStories() {
+      document.getElementById('storiesList').innerHTML = prophetStories.map(story => `
+        <article class="mini-card story-card">
+          <strong>${story.title}</strong>
+          <div class="story-text">${story.text}</div>
+          <div class="card-actions">
+            <button class="secondary" data-copy-story="${story.title}: ${story.text}">نسخ</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.getElementById('storiesList').addEventListener('click', event => {
+      const button = event.target.closest('[data-copy-story]');
+      if (button) copyText(button.dataset.copyStory);
+    });
+
+    function renderSeerah() {
+      document.getElementById('seerahList').innerHTML = seerahStories.map(story => `
+        <article class="mini-card story-card">
+          <strong>${story.title}</strong>
+          <div class="story-text">${story.text}</div>
+          <div class="card-actions">
+            <button class="secondary" data-copy-seerah="${story.title}: ${story.text}">نسخ</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.getElementById('seerahList').addEventListener('click', event => {
+      const button = event.target.closest('[data-copy-seerah]');
+      if (button) copyText(button.dataset.copySeerah);
+    });
+
+    function renderSeerahVideos() {
+      document.getElementById('seerahVideosList').innerHTML = seerahVideos.map(video => `
+        <article class="mini-card story-card">
+          <strong>${video.title}</strong>
+          <div class="story-text">${video.text}</div>
+          <div class="note" style="margin:12px 0 0;">
+            المتحدث: ${video.speaker}<br>
+            افتح الرابط، ثم اختر القناة الرسمية أو المصدر الأوضح قبل المشاهدة.
+          </div>
+          <div class="card-actions">
+            <button data-open-video="${video.url}">فتح الفيديوهات</button>
+            <button class="secondary" data-copy-video="${video.title}: ${video.url}">نسخ الرابط</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.getElementById('seerahVideosList').addEventListener('click', event => {
+      const openButton = event.target.closest('[data-open-video]');
+      const copyButton = event.target.closest('[data-copy-video]');
+      if (openButton) window.open(openButton.dataset.openVideo, '_blank');
+      if (copyButton) copyText(copyButton.dataset.copyVideo);
+    });
+
+    function renderBedtimeStories() {
+      document.getElementById('bedtimeStoriesList').innerHTML = bedtimeStories.map(story => `
+        <article class="mini-card story-card">
+          <strong>${story.title}</strong>
+          <div class="story-text">${story.text}</div>
+          <div class="note" style="margin:12px 0 0;">${story.ending}</div>
+          <div class="card-actions">
+            <button class="secondary" data-copy-bedtime="${story.title}: ${story.text} ${story.ending}">نسخ</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.getElementById('bedtimeStoriesList').addEventListener('click', event => {
+      const button = event.target.closest('[data-copy-bedtime]');
+      if (button) copyText(button.dataset.copyBedtime);
+    });
+
+    function renderKhushuSession() {
+      const daySeed = Math.floor(Date.now() / 86400000);
+      const surah = (daySeed % 20) + 1;
+      const dhikr = adhkar.filter(item => item.type === 'dhikr')[daySeed % adhkar.filter(item => item.type === 'dhikr').length];
+      const dua = adhkar.filter(item => item.type === 'duaa')[daySeed % adhkar.filter(item => item.type === 'duaa').length];
+      document.getElementById('khushuSteps').innerHTML = `
+        <article class="mini-card"><strong>1. قرآن</strong><div>اقرأ أو استمع إلى سورة ${surahs[surah - 1]}.</div></article>
+        <article class="mini-card"><strong>2. ذكر</strong><div>${dhikr.text}</div></article>
+        <article class="mini-card"><strong>3. دعاء</strong><div>${dua.text}</div></article>
+        <article class="mini-card"><strong>4. ختام</strong><div>خذ دقيقة صمت وتفكر، ثم احمد الله على نعمة الهداية.</div></article>
+      `;
+      setActiveView('quranView');
+      loadSurah(surah);
+      showToast('بدأت جلسة الخشوع');
+    }
+
+    document.getElementById('startKhushuBtn').addEventListener('click', renderKhushuSession);
+
+    document.getElementById('completeChallengeBtn').addEventListener('click', () => {
+      const today = new Date().toISOString().slice(0, 10);
+      setStorage(`challenge-${today}`, true);
+      showToast('رائع، تم تسجيل تحدي اليوم');
+    });
+
+    document.getElementById('startReminderBtn').addEventListener('click', () => {
+      const minutes = Math.max(1, Number(document.getElementById('reminderMinutes').value) || 30);
+      clearInterval(reminderTimer);
+      reminderTimer = setInterval(() => {
+        const item = adhkar[Math.floor(Math.random() * adhkar.length)];
+        showToast(`تذكير: ${item.text}`);
+      }, minutes * 60000);
+      showToast(`تم تشغيل التذكير كل ${minutes} دقيقة`);
+    });
+
+    document.getElementById('stopReminderBtn').addEventListener('click', () => {
+      clearInterval(reminderTimer);
+      reminderTimer = null;
+      showToast('تم إيقاف التذكير');
+    });
+
+    function renderLevel() {
+      const stats = getStorage('journeyStats', {});
+      const activeDays = Object.values(stats).filter(day => day.ayahs || day.surahs || day.hadiths).length;
+      const totalAyahs = Object.values(stats).reduce((sum, day) => sum + (day.ayahs || 0), 0);
+      const level = activeDays >= 14 ? 'قارئ يومي' : activeDays >= 5 ? 'مستمر' : 'مبتدئ';
+      document.getElementById('levelStats').textContent = `${level} - أيام النشاط: ${activeDays} - الآيات: ${totalAyahs}`;
+    }
+
+    function updateWorshipTimerDisplay() {
+      const minutes = Math.floor(worshipSecondsLeft / 60);
+      const seconds = worshipSecondsLeft % 60;
+      document.getElementById('worshipTimerDisplay').textContent =
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }
+
+    document.getElementById('startWorshipTimerBtn').addEventListener('click', () => {
+      clearInterval(worshipTimer);
+      worshipSecondsLeft = Number(document.getElementById('worshipTimerMinutes').value) * 60;
+      updateWorshipTimerDisplay();
+      worshipTimer = setInterval(() => {
+        worshipSecondsLeft -= 1;
+        updateWorshipTimerDisplay();
+        if (worshipSecondsLeft <= 0) {
+          clearInterval(worshipTimer);
+          showToast('انتهت جلسة العبادة. تقبل الله.');
+        }
+      }, 1000);
+      showToast('بدأ مؤقت جلسة العبادة');
+    });
+
+    document.getElementById('stopWorshipTimerBtn').addEventListener('click', () => {
+      clearInterval(worshipTimer);
+      worshipTimer = null;
+      showToast('تم إيقاف مؤقت العبادة');
+    });
+
+    function renderLearningAyah() {
+      const item = learningAyahs[Math.floor(Date.now() / 86400000) % learningAyahs.length];
+      document.getElementById('dailyAyahLearning').innerHTML =
+        `<strong>سورة ${item.surah}</strong><br>${item.ayah}<br><span>${item.meaning}</span>`;
+    }
+
+    function renderDates() {
+      const today = new Date();
+      const gregorian = new Intl.DateTimeFormat('ar-EG-u-ca-gregory', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }).format(today);
+      const hijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }).format(today);
+      document.getElementById('todayDates').innerHTML =
+        `<strong>ميلادي:</strong> ${gregorian}<br><strong>هجري:</strong> ${hijri}`;
+    }
+
+    function renderTafsirSelectors() {
+      const select = document.getElementById('tafsirSurahSelect');
+      if (!select.options.length) {
+        select.innerHTML = surahs.map((name, index) =>
+          `<option value="${index + 1}">${index + 1}. سورة ${name}</option>`
+        ).join('');
+      }
+      select.value = String(currentSurah);
+    }
+
+    async function loadTafsir() {
+      const surah = Number(document.getElementById('tafsirSurahSelect').value) || currentSurah;
+      const ayah = Math.max(1, Number(document.getElementById('tafsirAyahInput').value) || 1);
+      const title = document.getElementById('tafsirTitle');
+      const textBox = document.getElementById('tafsirText');
+      title.textContent = `سورة ${surahs[surah - 1]} - آية ${ayah}`;
+      textBox.textContent = 'جاري تحميل التفسير...';
+      try {
+        const response = await fetch(`https://api.alquran.cloud/v1/ayah/${surah}:${ayah}/ar.muyassar`);
+        if (!response.ok) throw new Error('tafsir');
+        const data = await response.json();
+        textBox.textContent = data.data?.text || 'لم يتوفر تفسير لهذه الآية الآن.';
+      } catch {
+        textBox.textContent = 'تعذر تحميل التفسير الآن. تأكد من اتصال الإنترنت ثم حاول مرة أخرى.';
+      }
+    }
+
+    document.getElementById('loadTafsirBtn').addEventListener('click', loadTafsir);
+    document.getElementById('copyTafsirBtn').addEventListener('click', () => {
+      copyText(`${document.getElementById('tafsirTitle').textContent}\n${document.getElementById('tafsirText').textContent}`);
+    });
+
+    function renderWorldCitySelect() {
+      const select = document.getElementById('worldCitySelect');
+      if (select.options.length) return;
+      select.innerHTML = worldCities.map((item, index) =>
+        `<option value="${index}">${item.label}</option>`
+      ).join('');
+    }
+
+    function applyWorldCity(index) {
+      const item = worldCities[index];
+      if (!item) return;
+      document.getElementById('prayerCityInput').value = item.city;
+      document.getElementById('prayerCountryInput').value = item.country;
+      document.getElementById('prayerMethodSelect').value = item.method;
+      document.getElementById('qiblaLatInput').value = item.lat;
+      document.getElementById('qiblaLngInput').value = item.lng;
+    }
+
+    async function renderPrayerTimes() {
+      renderWorldCitySelect();
+      const city = document.getElementById('prayerCityInput').value.trim() || 'Makkah';
+      const country = document.getElementById('prayerCountryInput').value.trim() || 'Saudi Arabia';
+      const method = document.getElementById('prayerMethodSelect').value;
+      const grid = document.getElementById('prayerTimesGrid');
+      grid.innerHTML = '<article class="info-tile">جاري تحميل مواقيت الصلاة...</article>';
+      try {
+        const url = `https://api.aladhan.com/v1/timingsByCity?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&method=${method}`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('prayer');
+        const data = await response.json();
+        const timings = data.data.timings;
+        const labels = [
+          ['Fajr', 'الفجر'], ['Sunrise', 'الشروق'], ['Dhuhr', 'الظهر'],
+          ['Asr', 'العصر'], ['Maghrib', 'المغرب'], ['Isha', 'العشاء']
+        ];
+        grid.innerHTML = labels.map(([key, label]) => `
+          <article class="info-tile">
+            <strong>${label}</strong>
+            <div>${timings[key]}</div>
+          </article>
+        `).join('') + `
+          <article class="info-tile">
+            <strong>المكان</strong>
+            <div>${city} - ${country}</div>
+          </article>
+          <article class="info-tile">
+            <strong>التاريخ</strong>
+            <div>${data.data.date.hijri.date} هـ<br>${data.data.date.gregorian.date} م</div>
+          </article>
+        `;
+      } catch {
+        grid.innerHTML = '<article class="info-tile">تعذر تحميل المواقيت الآن. تأكد من اتصال الإنترنت أو اكتب المدينة والدولة بالإنجليزية.</article>';
+      }
+    }
+
+    document.getElementById('worldCitySelect').addEventListener('change', event => {
+      applyWorldCity(Number(event.target.value));
+      renderPrayerTimes();
+    });
+    document.getElementById('loadPrayerTimesBtn').addEventListener('click', renderPrayerTimes);
+    document.getElementById('usePrayerLocationBtn').addEventListener('click', () => {
+      if (!navigator.geolocation) {
+        showToast('المتصفح لا يدعم تحديد الموقع');
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(async position => {
+        const { latitude, longitude } = position.coords;
+        document.getElementById('qiblaLatInput').value = latitude.toFixed(4);
+        document.getElementById('qiblaLngInput').value = longitude.toFixed(4);
+        document.getElementById('prayerTimesGrid').innerHTML = '<article class="info-tile">جاري تحميل المواقيت من موقعك...</article>';
+        try {
+          const method = document.getElementById('prayerMethodSelect').value;
+          const response = await fetch(`https://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=${method}`);
+          const data = await response.json();
+          const timings = data.data.timings;
+          document.getElementById('prayerTimesGrid').innerHTML = [
+            ['Fajr', 'الفجر'], ['Sunrise', 'الشروق'], ['Dhuhr', 'الظهر'], ['Asr', 'العصر'], ['Maghrib', 'المغرب'], ['Isha', 'العشاء']
+          ].map(([key, label]) => `<article class="info-tile"><strong>${label}</strong><div>${timings[key]}</div></article>`).join('');
+        } catch {
+          showToast('تعذر تحميل المواقيت من موقعك');
+        }
+      }, () => showToast('لم يتم السماح باستخدام الموقع'));
+    });
+
+    function calculateQibla() {
+      const lat = Number(document.getElementById('qiblaLatInput').value);
+      const lng = Number(document.getElementById('qiblaLngInput').value);
+      const kaabaLat = 21.4225 * Math.PI / 180;
+      const kaabaLng = 39.8262 * Math.PI / 180;
+      const userLat = lat * Math.PI / 180;
+      const userLng = lng * Math.PI / 180;
+      const diffLng = kaabaLng - userLng;
+      const y = Math.sin(diffLng);
+      const x = Math.cos(userLat) * Math.tan(kaabaLat) - Math.sin(userLat) * Math.cos(diffLng);
+      const bearing = (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+      document.getElementById('qiblaNeedle').style.transform = `rotate(${bearing}deg)`;
+      document.getElementById('qiblaDirection').textContent = `اتجاه القبلة: ${bearing.toFixed(1)} درجة من الشمال`;
+      document.getElementById('qiblaHint').textContent = bearing > 180 ? 'اتجه مع عقارب الساعة حتى تصل للدرجة الموضحة.' : 'اتجه من الشمال باتجاه الدرجة الموضحة.';
+    }
+
+    document.getElementById('calculateQiblaBtn').addEventListener('click', calculateQibla);
+    document.getElementById('useQiblaLocationBtn').addEventListener('click', () => {
+      if (!navigator.geolocation) {
+        showToast('المتصفح لا يدعم تحديد الموقع');
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(position => {
+        document.getElementById('qiblaLatInput').value = position.coords.latitude.toFixed(4);
+        document.getElementById('qiblaLngInput').value = position.coords.longitude.toFixed(4);
+        calculateQibla();
+      }, () => showToast('لم يتم السماح باستخدام الموقع'));
+    });
+
+    function renderLanguages() {
+      const select = document.getElementById('languageSelect');
+      if (!select.options.length) {
+        select.innerHTML = languages.map(([code, name]) =>
+          `<option value="${code}">${name} (${code})</option>`
+        ).join('');
+        document.getElementById('languageGrid').innerHTML = languages.map(([code, name]) =>
+          `<article class="info-tile"><strong>${name}</strong><div>${code}</div></article>`
+        ).join('');
+      }
+    }
+
+    document.getElementById('toggleLanguagePanelBtn').addEventListener('click', () => {
+      renderLanguages();
+      document.getElementById('languagePanel').classList.toggle('open');
+    });
+    document.getElementById('applyLanguageBtn').addEventListener('click', () => {
+      const select = document.getElementById('languageSelect');
+      document.documentElement.lang = select.value;
+      showToast(`تم اختيار اللغة: ${select.options[select.selectedIndex].text}`);
+    });
+    document.getElementById('openTranslateBtn').addEventListener('click', () => {
+      const lang = document.getElementById('languageSelect').value;
+      const url = `https://translate.google.com/translate?sl=ar&tl=${encodeURIComponent(lang)}&u=${encodeURIComponent(location.href)}`;
+      window.open(url, '_blank');
+    });
+
+    function renderComfort() {
+      const items = comfortItems.filter(item => comfortFilter === 'all' || item.category === comfortFilter);
+      document.getElementById('comfortList').innerHTML = items.map(item => `
+        <article class="mini-card">
+          <strong>${item.title}</strong>
+          <div>${item.text}</div>
+          <div class="card-actions">
+            <button class="secondary" data-copy-comfort="${item.text}">نسخ</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.querySelectorAll('.comfort-filter').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.comfort-filter').forEach(item => item.classList.remove('active'));
+        button.classList.add('active');
+        comfortFilter = button.dataset.comfortFilter;
+        renderComfort();
+      });
+    });
+
+    document.getElementById('comfortList').addEventListener('click', event => {
+      const button = event.target.closest('[data-copy-comfort]');
+      if (button) copyText(button.dataset.copyComfort);
+    });
+
+    function renderRuqyah() {
+      document.getElementById('ruqyahList').innerHTML = ruqyahItems.map(item => `
+        <article class="mini-card">
+          <strong>${item.title}</strong>
+          <div>${item.text}</div>
+          <div class="card-actions"><button class="secondary" data-copy-ruqyah="${item.text}">نسخ</button></div>
+        </article>
+      `).join('');
+    }
+
+    document.getElementById('ruqyahList').addEventListener('click', event => {
+      const button = event.target.closest('[data-copy-ruqyah]');
+      if (button) copyText(button.dataset.copyRuqyah);
+    });
+
+    function renderKids() {
+      const videosHtml = kidsVideos.map(video => `
+        <article class="mini-card">
+          <strong>${video.title}</strong>
+          <div>فيديوهات مناسبة لقسم الأطفال. افتح النتائج واختر القناة الواضحة والآمنة للمشاهدة.</div>
+          <div class="card-actions">
+            <button data-open-kids-video="${video.url}">فتح الفيديوهات</button>
+            <button class="secondary" data-copy-kids-video="${video.title}: ${video.url}">نسخ الرابط</button>
+          </div>
+        </article>
+      `).join('');
+      const storiesHtml = kidsItems.map(item => `
+        <article class="mini-card story-card">
+          <strong>${item.title}</strong>
+          <div class="story-text">${item.text}</div>
+        </article>
+      `).join('');
+      document.getElementById('kidsList').innerHTML = `
+        <article class="mini-card">
+          <strong>فيديوهات وقصص للأطفال</strong>
+          <div>قصص مكتوبة، وروابط بحث لفيديوهات القرآن والإنسان والحيوان في القرآن.</div>
+        </article>
+        ${videosHtml}
+        ${storiesHtml}
+      `;
+    }
+
+    document.getElementById('kidsList').addEventListener('click', event => {
+      const openButton = event.target.closest('[data-open-kids-video]');
+      const copyButton = event.target.closest('[data-copy-kids-video]');
+      if (openButton) window.open(openButton.dataset.openKidsVideo, '_blank');
+      if (copyButton) copyText(copyButton.dataset.copyKidsVideo);
+    });
+
+    function renderJournal() {
+      const notes = getStorage('journalNotes', []);
+      document.getElementById('journalList').innerHTML = notes.map((note, index) => `
+        <article class="mini-card">
+          <strong>${note.date}</strong>
+          <div>${note.text}</div>
+          <div class="card-actions"><button class="secondary" data-delete-note="${index}">حذف</button></div>
+        </article>
+      `).join('') || '<article class="mini-card">لا توجد ملاحظات بعد.</article>';
+    }
+
+    document.getElementById('saveJournalBtn').addEventListener('click', () => {
+      const input = document.getElementById('journalInput');
+      const text = input.value.trim();
+      if (!text) {
+        showToast('اكتب ملاحظة أولًا');
+        return;
+      }
+      const notes = getStorage('journalNotes', []);
+      notes.unshift({ date: new Date().toLocaleDateString('ar'), text });
+      setStorage('journalNotes', notes);
+      input.value = '';
+      renderJournal();
+      showToast('تم حفظ الملاحظة');
+    });
+
+    document.getElementById('journalList').addEventListener('click', event => {
+      const button = event.target.closest('[data-delete-note]');
+      if (!button) return;
+      const notes = getStorage('journalNotes', []);
+      notes.splice(Number(button.dataset.deleteNote), 1);
+      setStorage('journalNotes', notes);
+      renderJournal();
+    });
+
+    document.getElementById('clearJournalBtn').addEventListener('click', () => {
+      setStorage('journalNotes', []);
+      renderJournal();
+      showToast('تم مسح السجل');
+    });
+
+    document.getElementById('showHadithBtn').addEventListener('click', () => {
+      updateProgress('hadiths');
+      renderHadiths();
+    });
+    document.getElementById('hadithSearch').addEventListener('input', () => {
+      updateProgress('hadiths', 0);
+      renderHadiths();
+    });
+    document.getElementById('hadithFilter').addEventListener('change', renderHadiths);
+
+    selectSectionGroup('quran', true);
+    applyPreferences();
+    buildSurahList();
+    loadSurah(1);
+    renderHadiths();
+    renderAdhkar();
+    renderFavorites();
+    renderDailyCards();
+    renderProgress();
+    renderLevel();
+    renderLearningAyah();
+    renderDates();
+    renderTafsirSelectors();
+    renderWorldCitySelect();
+    renderLanguages();
+    calculateQibla();
+    renderTasbihCount();
+    renderKhatma();
+    renderRamadanPlan();
+    renderNames();
+    renderStoryLibrary();
+    renderStories();
+    renderSeerah();
+    renderSeerahVideos();
+    renderBedtimeStories();
+    renderComfort();
+    renderRuqyah();
+    renderKids();
+    renderJournal();
+  </script>
+</body>
+</html>
